@@ -1,6 +1,23 @@
 {
     "name": "polyly",
+    "author": "kinetictactic",
+    "license": "MIT",
     "private": false,
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/KineticTactic/polyly.git"
+    },
+    "bugs": {
+        "url": "https://github.com/KineticTactic/polyly/issues"
+    },
+    "keywords": [
+        "webgl",
+        "webgl2",
+        "renderer",
+        "graphics",
+        "2d",
+        "canvas"
+    ],
     "version": "0.0.0",
     "type": "module",
     "files": [
@@ -8,6 +25,7 @@
     ],
     "main": "./dist/polyly.umd.cjs",
     "module": "./dist/polyly.js",
+    "typings": "dist/polyly.d.ts",
     "exports": {
         ".": {
             "import": "./dist/polyly.js",
@@ -21,6 +39,7 @@
     },
     "devDependencies": {
         "typescript": "^5.0.2",
-        "vite": "^4.4.5"
+        "vite": "^4.4.5",
+        "vite-plugin-dts": "^3.6.0"
     }
 }
