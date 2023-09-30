@@ -1,0 +1,26 @@
+{
+    "name": "polyly",
+    "private": false,
+    "version": "0.0.0",
+    "type": "module",
+    "files": [
+        "dist"
+    ],
+    "main": "./dist/polyly.umd.cjs",
+    "module": "./dist/polyly.js",
+    "exports": {
+        ".": {
+            "import": "./dist/polyly.js",
+            "require": "./dist/polyly.umd.cjs"
+        }
+    },
+    "scripts": {
+        "dev": "vite",
+        "build": "tsc && vite build",
+        "preview": "vite preview"
+    },
+    "devDependencies": {
+        "typescript": "^5.0.2",
+        "vite": "^4.4.5"
+    }
+}
