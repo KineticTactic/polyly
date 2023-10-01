@@ -14,4 +14,7 @@ export default defineConfig({
         },
     },
     plugins: [dts({ entryRoot: resolve(__dirname, "src") })],
+    rollupOptions: {
+        external: ["twgl.js"],
+    },
 });

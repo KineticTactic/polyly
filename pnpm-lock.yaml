@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+dependencies:
+  twgl.js:
+    specifier: ^5.5.3
+    version: 5.5.3
+
 devDependencies:
   typescript:
     specifier: ^5.0.2
@@ -705,6 +710,10 @@ packages:
     resolution: {integrity: sha512-/OaKK0xYrs3DmxRYqL/yDc+FxFUVYhDlXMhRmv3z915w2HF1tnN1omB354j8VUGO/hbRzyD6Y3sA7v7GS/ceog==}
     engines: {node: '>=4'}
     dev: true
+
+  /twgl.js@5.5.3:
+    resolution: {integrity: sha512-lUrWxXmEURxQphwu4hMkudIThjhbrej3WUKH2qdTifixuO1FxQRLgxJVQ81rTDw9CBoxx4m4iIEOfgCf02Ip1Q==}
+    dev: false
 
   /typescript@5.0.4:
     resolution: {integrity: sha512-cW9T5W9xY37cc+jfEnaUvX91foxtHkza3Nw3wkoF4sSlKn0MONdkdEndig/qPBWXNkmplh3NzayQzCiHM4/hqw==}
