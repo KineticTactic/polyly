@@ -2,10 +2,16 @@
 
 A WebGL based 2D primitives renderer.
 
+### Install
+
+```
+$ npm install polyly
+```
+
 ### Sample code
 
 ```js
-import Polyly from "../src/Polyly";
+import Polyly from "polyly";
 
 // Create a Renderer
 const renderer = new Polyly.Renderer({ webglVersion: 2 });
