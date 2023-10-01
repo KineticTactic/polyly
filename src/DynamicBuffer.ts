@@ -31,13 +31,15 @@ export class DynamicBuffer extends Buffer {
         this.addVertices(vertices);
     }
 
-    public override updateBuffers() {
+    public override update() {
         this.buffers[this.currentBufferIndex].fill();
         this.buffers[this.currentBufferIndex].updateBufferData(this.gl);
     }
 
     public override render(shaderProgramInfo: twgl.ProgramInfo) {
-        console.log(this.buffers);
+        twgl.setUniforms(shaderProgramInfo, {
+            modelMatrix: this.transform.getMatrix(),
+        });
 
         for (let i = 0; i <= this.currentBufferIndex; i++) {
             twgl.setBuffersAndAttributes(this.gl, shaderProgramInfo, this.buffers[i].bufferInfo);
@@ -45,7 +47,7 @@ export class DynamicBuffer extends Buffer {
         }
     }
 
-    public reset() {
+    public override reset() {
         this.currentBufferIndex = 0;
         for (const buffer of this.buffers) {
             buffer.resetCount();

@@ -7,6 +7,7 @@ import { DynamicBuffer } from "./DynamicBuffer";
 import Vector from "./Vector";
 import { Color } from "./Color";
 import { calculateSidewaysVertices, calculateVertexPoints } from "./math";
+import { Transform } from "./Transform";
 
 export interface RendererOptions {
     canvas?: HTMLCanvasElement;
@@ -14,14 +15,14 @@ export interface RendererOptions {
 }
 
 export class Renderer {
-    canvas: HTMLCanvasElement;
-    gl: WebGLRenderingContext | WebGL2RenderingContext;
+    public canvas: HTMLCanvasElement;
+    public gl: WebGLRenderingContext | WebGL2RenderingContext;
+    public transform: Transform;
 
     private shaderProgramInfo: twgl.ProgramInfo;
-
     private buffers: Buffer[] = [];
-    private defaultBuffer: DynamicBuffer;
-
+    private currentBufferIndex: number = 0;
+    // private defaultBuffer: DynamicBuffer;
     private currentPath: Vertex[] = [];
 
     public constructor(options: RendererOptions) {
@@ -53,12 +54,23 @@ export class Renderer {
         twgl.resizeCanvasToDisplaySize(this.gl.canvas as HTMLCanvasElement);
         this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
 
-        this.defaultBuffer = new DynamicBuffer(this.gl, { bufferSize: 100 });
-        // this.addBuffer(new DynamicBuffer(this.gl, { bufferSize: 1000 }));
+        // this.defaultBuffer = new DynamicBuffer(this.gl, { bufferSize: 100 });
+        this.setBuffer(new DynamicBuffer(this.gl, { bufferSize: 1000 }));
+
+        this.transform = new Transform();
     }
 
-    public addBuffer(buffer: Buffer) {
-        this.buffers.push(buffer);
+    public setBuffer(buffer: Buffer | 0) {
+        if (buffer === 0) {
+            this.currentBufferIndex = 0;
+            return;
+        }
+
+        if (buffer.id === -1) {
+            buffer.id = this.buffers.length;
+            this.buffers.push(buffer);
+        }
+        this.currentBufferIndex = buffer.id;
     }
 
     public clear(color: Color = new Color(0, 0, 0, 255)) {
@@ -69,8 +81,8 @@ export class Renderer {
     public line(startPos: Vector, endPos: Vector, width: number, color: Color): void {
         const vertex1 = new Vertex(startPos, color);
         const vertex2 = new Vertex(endPos, color);
-        this.defaultBuffer.addVerticesAndIndices(
-            [...calculateSidewaysVertices(vertex1, vertex2, width), ...calculateSidewaysVertices(vertex2, vertex1, width)],
+        this.buffers[this.currentBufferIndex].addVerticesAndIndices(
+            this.transform.transformVertices([...calculateSidewaysVertices(vertex1, vertex2, width), ...calculateSidewaysVertices(vertex2, vertex1, width)]),
             [0, 1, 2, 0, 2, 3]
         );
     }
@@ -100,7 +112,7 @@ export class Renderer {
             indexData.push(i, i + 1, 0, i + 1, 0, 1);
         }
 
-        this.defaultBuffer.addVerticesAndIndices(outputVertices, indexData);
+        this.buffers[this.currentBufferIndex].addVerticesAndIndices(this.transform.transformVertices(outputVertices), indexData);
     }
 
     public beginPath() {
@@ -129,6 +141,11 @@ export class Renderer {
         this.currentPath.push(...vertices);
     }
 
+    public rect(pos: Vector, size: Vector, color: Color) {
+        const positions = [pos, new Vector(pos.x + size.x, pos.y), new Vector(pos.x + size.y, pos.y + size.y), new Vector(pos.x, pos.y + size.y)];
+        this.currentPath.push(...positions.map((p) => new Vertex(p, color)));
+    }
+
     public strokePath(width: number, closed: boolean = false) {
         ///TODO: REneame to build path or something
         this.path(this.currentPath, width, closed);
@@ -139,30 +156,31 @@ export class Renderer {
         for (let i = 1; i < this.currentPath.length - 1; i++) {
             indicesList.push(0, i, i + 1);
         }
-        this.defaultBuffer.addVerticesAndIndices(this.currentPath, indicesList);
+        this.buffers[this.currentBufferIndex].addVerticesAndIndices(this.transform.transformVertices(this.currentPath), indicesList);
     }
 
     public render(camera: Camera): void {
-        this.defaultBuffer.updateBuffers();
+        this.buffers[0].update();
 
         // Update uniforms
         const uniforms = {
             resolution: [this.gl.canvas.width, this.gl.canvas.height],
-            u_matrix: camera ? camera.getMatrix() : twgl.m4.identity(),
+            viewProjectionMatrix: camera ? camera.getMatrix() : twgl.m4.identity(),
         };
 
         this.gl.useProgram(this.shaderProgramInfo.program);
         twgl.setUniforms(this.shaderProgramInfo, uniforms);
 
         // Render buffers
-        this.defaultBuffer.render(this.shaderProgramInfo);
-
         for (const buffer of this.buffers) {
+            // this.defaultBuffer.render(this.shaderProgramInfo);
+            console.log(buffer);
+
             buffer.render(this.shaderProgramInfo);
         }
 
         // Reset
-        this.defaultBuffer.reset();
+        this.buffers[0].reset();
     }
 
     public getDisplaySize() {

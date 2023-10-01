@@ -6,6 +6,8 @@ export interface BufferDataOptions {
     colors?: Uint8Array;
     indices?: Uint16Array;
     numVertices?: number;
+    numIndices?: number;
+    type?: "static" | "dynamic";
 }
 
 export class BufferData {
@@ -19,7 +21,6 @@ export class BufferData {
     indexCapacity = 0;
 
     constructor(gl: WebGL2RenderingContext | WebGLRenderingContext, options: BufferDataOptions) {
-        /// TODO: Change color to Uint8Array
         if (options.positions && options.colors && options.indices) {
             this.positions = options.positions;
             this.colors = options.colors;
@@ -27,7 +28,7 @@ export class BufferData {
         } else if (options.numVertices) {
             this.positions = new Float32Array(options.numVertices * 2);
             this.colors = new Uint8Array(options.numVertices * 4);
-            this.indices = new Uint16Array(options.numVertices * 3);
+            this.indices = new Uint16Array(options.numIndices ? options.numIndices : options.numVertices * 3);
         } else {
             throw new Error("Invalid BufferDataOptions! Must provide positions, colors, and indices arrays, or specify numVertices");
         }
@@ -35,10 +36,13 @@ export class BufferData {
         this.vertexCapacity = this.positions.length / 2;
         this.indexCapacity = this.indices.length;
 
+        const type = options.type ? options.type : "dynamic";
+        const usage = type === "dynamic" ? gl.DYNAMIC_DRAW : gl.STATIC_DRAW;
+
         this.bufferInfo = twgl.createBufferInfoFromArrays(gl, {
-            position: { numComponents: 2, data: this.positions, drawType: gl.DYNAMIC_DRAW },
-            color: { numComponents: 4, data: this.colors, drawType: gl.DYNAMIC_DRAW },
-            indices: { numComponents: 3, data: this.indices, drawType: gl.DYNAMIC_DRAW },
+            position: { numComponents: 2, data: this.positions, drawType: usage },
+            color: { numComponents: 4, data: this.colors, drawType: usage },
+            indices: { numComponents: 3, data: this.indices, drawType: usage },
         });
     }
 
