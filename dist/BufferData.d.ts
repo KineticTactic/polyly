@@ -5,6 +5,8 @@ export interface BufferDataOptions {
     colors?: Uint8Array;
     indices?: Uint16Array;
     numVertices?: number;
+    numIndices?: number;
+    type?: "static" | "dynamic";
 }
 export declare class BufferData {
     positions: Float32Array;

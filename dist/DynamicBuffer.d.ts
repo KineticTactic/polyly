@@ -10,7 +10,7 @@ export declare class DynamicBuffer extends Buffer {
     private currentBufferIndex;
     constructor(gl: WebGL2RenderingContext | WebGLRenderingContext, options: DynamicBufferOptions);
     addVerticesAndIndices(vertices: Vertex[], indices: number[]): void;
-    updateBuffers(): void;
+    update(): void;
     render(shaderProgramInfo: twgl.ProgramInfo): void;
     reset(): void;
     private addBuffer;

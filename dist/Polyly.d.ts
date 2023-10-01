@@ -1,5 +1,6 @@
 import { Renderer, RendererOptions } from "./Renderer.ts";
 import { DynamicBuffer, DynamicBufferOptions } from "./DynamicBuffer.ts";
+import StaticBuffer from "./StaticBuffer.ts";
 import Buffer from "./Buffer.ts";
 import { BufferData, BufferDataOptions } from "./BufferData.ts";
 import Camera from "./Camera.ts";
@@ -17,6 +18,7 @@ declare const _default: {
     Vector: typeof Vector;
     RGB: typeof RGB;
     RGBA: typeof RGBA;
+    StaticBuffer: typeof StaticBuffer;
 };
 export default _default;
 export type { RendererOptions, DynamicBufferOptions, BufferDataOptions };
