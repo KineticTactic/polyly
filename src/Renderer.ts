@@ -11,7 +11,13 @@ import { Transform } from "./Transform";
 
 export interface RendererOptions {
     canvas?: HTMLCanvasElement;
-    webglVersion?: number;
+    webglVersion?: 1 | 2;
+}
+
+export interface StrokePathOptions {
+    closed?: boolean;
+    dashed?: boolean;
+    dashLength?: number;
 }
 
 export class Renderer {
@@ -146,9 +152,41 @@ export class Renderer {
         this.currentPath.push(...positions.map((p) => new Vertex(p, color)));
     }
 
-    public strokePath(width: number, closed: boolean = false) {
-        ///TODO: REneame to build path or something
-        this.path(this.currentPath, width, closed);
+    public strokePath(width: number, { closed = false, dashed = false, dashLength = 10 }: StrokePathOptions = {}) {
+        if (!dashed) {
+            ///TODO: REneame to build path or something
+            this.path(this.currentPath, width, closed);
+            return;
+        }
+
+        let lastVertexOfLastEdge: null | Vertex = null;
+
+        const endIndex = closed ? this.currentPath.length + 1 : this.currentPath.length;
+        for (let i = 0; i < endIndex; i++) {
+            const v1 = this.currentPath[i % this.currentPath.length];
+            const v2 = this.currentPath[(i + 1) % this.currentPath.length];
+            const length = v1.pos.dist(v2.pos);
+            const numSegments = Math.floor(length / dashLength);
+            const segmentLength = length / numSegments;
+
+            let lastVertex = this.currentPath[i];
+
+            const dir = v2.pos.copy().sub(v1.pos);
+            for (let j = 1; j < numSegments; j++) {
+                const newVertexPos = v1.pos.copy().add(dir.copy().setMag(segmentLength * j));
+                let newVertex = new Vertex(newVertexPos, Color.interpolate(v1.color, v2.color, j / numSegments));
+
+                if (j === 1 && lastVertexOfLastEdge) {
+                    this.path([lastVertexOfLastEdge, v1, newVertex], width);
+                    if (i === endIndex - 1) break;
+                }
+
+                if (j % 2 === 0) this.path([lastVertex, newVertex], width);
+                lastVertex = newVertex;
+            }
+
+            lastVertexOfLastEdge = lastVertex;
+        }
     }
 
     public fillPath() {

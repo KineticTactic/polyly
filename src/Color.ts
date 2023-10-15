@@ -1,3 +1,5 @@
+import { interpolate } from "./math";
+
 export function RGB(r: number, g: number, b: number) {
     return new Color(r, g, b);
 }
@@ -34,5 +36,14 @@ export class Color {
         const b = bigint & 255;
 
         return RGBA(r, g, b, alpha);
+    }
+
+    static interpolate(color1: Color, color2: Color, t: number): Color {
+        return new Color(
+            interpolate(t, 0, 1, color1.r, color2.r),
+            interpolate(t, 0, 1, color1.g, color2.g),
+            interpolate(t, 0, 1, color1.b, color2.b),
+            interpolate(t, 0, 1, color1.a, color2.a)
+        );
     }
 }
