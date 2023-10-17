@@ -1,6 +1,6 @@
 import "./style.css";
 
-import Polyly from "../src/Polyly";
+import * as Polyly from "../src/Polyly";
 
 const renderer = new Polyly.Renderer({ webglVersion: 2 });
 const camera = new Polyly.Camera(renderer.getDisplaySize());

@@ -19,5 +19,10 @@
         "noUnusedParameters": true,
         "noFallthroughCasesInSwitch": true
     },
-    "include": ["src", "test"]
+    "include": ["src", "test"],
+    "typedocOptions": {
+        "entryPoints": ["src/Polyly.ts"],
+        "out": "docs",
+        "githubPages": true
+    }
 }

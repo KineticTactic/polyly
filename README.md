@@ -11,7 +11,7 @@ $ npm install polyly
 ### Getting Started
 
 ```js
-import Polyly from "polyly";
+import * as Polyly from "polyly";
 
 const renderer = new Polyly.Renderer({ webglVersion: 2 });
 const camera = new Polyly.Camera(renderer.getDisplaySize());
@@ -26,7 +26,7 @@ renderer.render(camera);
 
 ### Drawing lines
 
-#### `Renderer.line(start, end, width, color)`
+`Renderer.line(start, end, width, color)`
 
 Draws a line.
 
@@ -36,7 +36,7 @@ renderer.line(new Polyly.Vector(-10, 30), new Polyly.Vector(-100, 150), 10, new 
 
 ### Drawing shapes
 
-#### `Renderer.rect(position, size, color)`
+`Renderer.rect(position, size, color)`
 
 Draws a rectangle.
 
@@ -46,7 +46,7 @@ renderer.rect(new Polyly.Vector(0, 0), new Polyly.Vector(200, 100), new Polyly.C
 renderer.fillPath();
 ```
 
-#### `Renderer.arc(position, radius, startAngle, endAngle, color)`
+`Renderer.arc(position, radius, startAngle, endAngle, color)`
 
 Draws an arc or a circle.
 
@@ -59,9 +59,9 @@ renderer.fillPath();
 
 ### Drawing paths
 
-#### `Renderer.vertex(position, color)`
+`Renderer.vertex(position, color)`
 
-#### `Renderer.vertex(vertex)`
+`Renderer.vertex(vertex)`
 
 Adds a vertex to the current path.
 
@@ -77,7 +77,7 @@ renderer.fillPath();
 
 ### Fill and stroke
 
-#### `Renderer.strokePath(width, strokePathOptions?)`
+`Renderer.strokePath(width, strokePathOptions?)`
 
 Strokes (outlines) every single path or shape added since the last `Renderer.beginPath()` call.
 
@@ -93,7 +93,7 @@ strokePathOptions: {
 renderer.strokePath(10, { closed: true, dashed: true, dashLength: 15 });
 ```
 
-#### `Renderer.fillPath()`
+`Renderer.fillPath()`
 
 Fills every single path or shapes added since the last `Renderer.beginPath()` call.
 
@@ -103,7 +103,7 @@ renderer.fillPath();
 
 ### Render
 
-#### `Renderer.render(camera)`
+`Renderer.render(camera)`
 
 Renders the scene. (to be called once per frame)
 

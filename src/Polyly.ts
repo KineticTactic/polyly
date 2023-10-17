@@ -1,12 +1,15 @@
-import { Renderer, RendererOptions } from "./Renderer.js";
-import { DynamicBuffer, DynamicBufferOptions } from "./DynamicBuffer.js";
-import StaticBuffer from "./StaticBuffer.js";
-import Buffer from "./Buffer.js";
-import { BufferData, BufferDataOptions } from "./BufferData.js";
-import Camera from "./Camera.js";
-import { Color, RGB, RGBA } from "./Color.js";
-import Vector from "./Vector.js";
-import Vertex from "./Vertex.js";
+export { Renderer } from "./core/Renderer.ts";
+export { DynamicBuffer } from "./buffers/DynamicBuffer.ts";
+export { StaticBuffer } from "./buffers/StaticBuffer.ts";
+export { Buffer } from "./buffers/Buffer.ts";
+export { BufferData } from "./buffers/BufferData.ts";
+export { Camera } from "./core/Camera.ts";
+export { Color, RGB, RGBA } from "./util/Color.ts";
+export { Vector } from "./util/Vector.ts";
+export { Vertex } from "./core/Vertex.ts";
+export { Transform } from "./core/Transform.ts";
 
-export default { Renderer, DynamicBuffer, Buffer, BufferData, Camera, Color, Vertex, Vector, RGB, RGBA, StaticBuffer };
-export type { RendererOptions, DynamicBufferOptions, BufferDataOptions };
+export type { RendererOptions } from "./core/Renderer.ts";
+export type { DynamicBufferOptions } from "./buffers/DynamicBuffer.ts";
+export type { BufferDataOptions } from "./buffers/BufferData.ts";
+export type { StrokePathOptions } from "./core/Renderer.ts";
