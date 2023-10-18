@@ -8,7 +8,9 @@ export default defineConfig({
             entry: resolve(__dirname, "src/Polyly.ts"),
             name: "polyly",
             fileName: "polyly",
+            target: "esnext",
         },
+        target: "esnext",
         rollupOptions: {
             external: [],
         },
