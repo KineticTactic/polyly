@@ -80,11 +80,24 @@ export class Renderer {
         this.gl.enable(this.gl.BLEND);
         this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE); // Additive Blending
         twgl.resizeCanvasToDisplaySize(this.gl.canvas as HTMLCanvasElement);
+
+        ///TODO: FIX THIS MAKE THIS RESIZE ON RESIZE
         this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
 
         this.setBuffer(new DynamicBuffer(this.gl, { bufferSize: 1000 }));
 
         this.transform = new Transform();
+    }
+
+    /**
+     * Resizes the canvas to the specified width and height
+     * @param width
+     * @param height
+     */
+    public resizeCanvas(width: number, height: number) {
+        this.canvas.width = width;
+        this.canvas.height = height;
+        this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
     }
 
     /**
@@ -177,6 +190,22 @@ export class Renderer {
             this.currentPath.push(v);
         } else if (color) {
             this.currentPath.push(new Vertex(v, color));
+        }
+    }
+
+    /**
+     * Draws vertices (to the current path).
+     * @param pos
+     * @param color
+     */
+    public vertices(positions: Vector[], color: Color): void;
+    public vertices(vertices: Vertex[]): void;
+
+    public vertices(v: Vector[] | Vertex[], color?: Color) {
+        if (v[0] instanceof Vertex) {
+            this.currentPath = [...this.currentPath, ...(v as Vertex[])];
+        } else if (color) {
+            this.currentPath = [...this.currentPath, ...(v as Vector[]).map((pos) => new Vertex(pos, color))];
         }
     }
 
@@ -282,7 +311,7 @@ export class Renderer {
         // Render buffers
         for (const buffer of this.buffers) {
             // this.defaultBuffer.render(this.shaderProgramInfo);
-            console.log(buffer);
+            // console.log(buffer);
 
             buffer.render(this.shaderProgramInfo);
         }

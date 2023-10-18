@@ -46,6 +46,12 @@ export declare class Renderer {
      */
     constructor(options: RendererOptions);
     /**
+     * Resizes the canvas to the specified width and height
+     * @param width
+     * @param height
+     */
+    resizeCanvas(width: number, height: number): void;
+    /**
      * Sets the current buffer to draw to
      * @param buffer The buffer to draw to
      */
@@ -75,6 +81,13 @@ export declare class Renderer {
      */
     vertex(pos: Vector, color: Color): void;
     vertex(vertex: Vertex): void;
+    /**
+     * Draws vertices (to the current path).
+     * @param pos
+     * @param color
+     */
+    vertices(positions: Vector[], color: Color): void;
+    vertices(vertices: Vertex[]): void;
     /**
      * Draws an arc (to the current path). For a circle, set `startAngle` to `0` and `endAngle` to `Math.PI * 2`
      * @param pos The center of the arc

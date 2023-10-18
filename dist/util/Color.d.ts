@@ -26,6 +26,15 @@ export declare class Color {
     g: number;
     b: number;
     a: number;
+    static WHITE: Color;
+    static BLACK: Color;
+    static RED: Color;
+    static GREEN: Color;
+    static BLUE: Color;
+    static YELLOW: Color;
+    static MAGENTA: Color;
+    static CYAN: Color;
+    static TRANSPARENT: Color;
     constructor(r: number, g: number, b: number, a?: number);
     /**
      * Returns an array of the colour values [r, g, b, a]
