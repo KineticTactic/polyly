@@ -78,8 +78,8 @@ export class Camera {
     public worldSpaceToScreenSpace(vector: Vector) {
         const factor = window.innerHeight / this.zoom;
 
-        const x = interpolate(vector.x, -this.aspect * factor, this.aspect * factor, 0, window.innerWidth) - this.pos.x;
-        const y = interpolate(vector.y, -1 * factor, 1 * factor, 0, window.innerHeight) - this.pos.y;
+        const x = interpolate(vector.x, -this.aspect * factor + this.pos.x, this.aspect * factor + this.pos.x, 0, window.innerWidth);
+        const y = interpolate(vector.y, -1 * factor + this.pos.y, 1 * factor + this.pos.y, 0, window.innerHeight);
         return new Vector(x, y);
     }
 

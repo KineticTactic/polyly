@@ -1324,7 +1324,7 @@ class Li {
    * @returns The Vector converted to Screen space
    */
   worldSpaceToScreenSpace(t) {
-    const n = window.innerHeight / this.zoom, r = K(t.x, -this.aspect * n, this.aspect * n, 0, window.innerWidth) - this.pos.x, i = K(t.y, -1 * n, 1 * n, 0, window.innerHeight) - this.pos.y;
+    const n = window.innerHeight / this.zoom, r = K(t.x, -this.aspect * n + this.pos.x, this.aspect * n + this.pos.x, 0, window.innerWidth), i = K(t.y, -1 * n + this.pos.y, 1 * n + this.pos.y, 0, window.innerHeight);
     return new A(r, i);
   }
   /**

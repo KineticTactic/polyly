@@ -57,4 +57,11 @@ renderer.renderText("Hellooo World!", new Polyly.Vector(100, 100), Polyly.Color.
 renderer.setFont("30px Arial");
 renderer.renderText("THE quick Brown Fox ", new Polyly.Vector(-100, 0), Polyly.Color.WHITE);
 
+renderer.camera.translate(new Polyly.Vector(-100, -100));
+// renderer.camera.setZoom(0.2);
+renderer.camera.setZoom(2);
+console.log(renderer.camera);
+
+console.log(renderer.camera.worldSpaceToScreenSpace(renderer.camera.screenSpaceToWorldSpace(new Polyly.Vector(100, 100))));
+
 renderer.render();
