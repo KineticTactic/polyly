@@ -1,4 +1,4 @@
-<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>Transform | polyly</title><meta name="description" content="Documentation for polyly"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script defer src="../assets/main.js"></script><script async src="../assets/search.js" id="tsd-search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
+<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>CanvasTextRenderer | polyly</title><meta name="description" content="Documentation for polyly"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script defer src="../assets/main.js"></script><script async src="../assets/search.js" id="tsd-search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
 <div class="tsd-toolbar-contents container">
 <div class="table-cell" id="tsd-search" data-base="..">
 <div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="#icon-search"></use></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div>
@@ -13,18 +13,14 @@
 <div class="tsd-page-title">
 <ul class="tsd-breadcrumb">
 <li><a href="../modules.html">polyly</a></li>
-<li><a href="Transform.html">Transform</a></li></ul>
-<h1>Class Transform</h1></div>
-<section class="tsd-panel tsd-comment">
-<div class="tsd-comment tsd-typography"><p>The transform class</p>
-</div>
-<div class="tsd-comment tsd-typography"></div></section>
+<li><a href="CanvasTextRenderer.html">CanvasTextRenderer</a></li></ul>
+<h1>Class CanvasTextRenderer</h1></div>
 <section class="tsd-panel tsd-hierarchy">
 <h4>Hierarchy</h4>
 <ul class="tsd-hierarchy">
-<li><span class="target">Transform</span></li></ul></section><aside class="tsd-sources">
+<li><span class="target">CanvasTextRenderer</span></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Transform.ts#L9">core/Transform.ts:9</a></li></ul></aside>
+<li>Defined in core/CanvasTextRenderer.ts:14</li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -32,126 +28,117 @@
 <div class="tsd-accordion-details">
 <section class="tsd-index-section">
 <h3 class="tsd-index-heading">Constructors</h3>
-<div class="tsd-index-list"><a href="Transform.html#constructor" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-512"></use></svg><span>constructor</span></a>
+<div class="tsd-index-list"><a href="CanvasTextRenderer.html#constructor" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-512"></use></svg><span>constructor</span></a>
 </div></section>
 <section class="tsd-index-section">
 <h3 class="tsd-index-heading">Properties</h3>
-<div class="tsd-index-list"><a href="Transform.html#rotation" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>rotation</span></a>
-<a href="Transform.html#scaling" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>scaling</span></a>
-<a href="Transform.html#transformed" class="tsd-index-link tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>transformed</span></a>
-<a href="Transform.html#translation" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>translation</span></a>
+<div class="tsd-index-list"><a href="CanvasTextRenderer.html#canvas" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>canvas</span></a>
+<a href="CanvasTextRenderer.html#ctx" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>ctx</span></a>
+<a href="CanvasTextRenderer.html#textBuffer" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>text<wbr/>Buffer</span></a>
 </div></section>
 <section class="tsd-index-section">
 <h3 class="tsd-index-heading">Methods</h3>
-<div class="tsd-index-list"><a href="Transform.html#getMatrix" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>get<wbr/>Matrix</span></a>
-<a href="Transform.html#resetTransforms" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>reset<wbr/>Transforms</span></a>
-<a href="Transform.html#rotate" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>rotate</span></a>
-<a href="Transform.html#scale" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>scale</span></a>
-<a href="Transform.html#transformVertices" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>transform<wbr/>Vertices</span></a>
-<a href="Transform.html#translate" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>translate</span></a>
+<div class="tsd-index-list"><a href="CanvasTextRenderer.html#clear" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>clear</span></a>
+<a href="CanvasTextRenderer.html#render" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>render</span></a>
+<a href="CanvasTextRenderer.html#renderText" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>render<wbr/>Text</span></a>
+<a href="CanvasTextRenderer.html#setFont" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>set<wbr/>Font</span></a>
 </div></section></div></details></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Constructors</h2>
 <section class="tsd-panel tsd-member"><a id="constructor" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>constructor</span><a href="#constructor" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
-<li class="tsd-signature tsd-anchor-link" id="constructor.new_Transform"><span class="tsd-kind-constructor-signature">new <wbr/>Transform</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="Transform.html" class="tsd-signature-type tsd-kind-class">Transform</a><a href="#constructor.new_Transform" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="constructor.new_CanvasTextRenderer"><span class="tsd-kind-constructor-signature">new <wbr/>Canvas<wbr/>Text<wbr/>Renderer</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">options</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="CanvasTextRenderer.html" class="tsd-signature-type tsd-kind-class">CanvasTextRenderer</a><a href="#constructor.new_CanvasTextRenderer" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
-<h4 class="tsd-returns-title">Returns <a href="Transform.html" class="tsd-signature-type tsd-kind-class">Transform</a></h4><aside class="tsd-sources">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">options</span>: <a href="../interfaces/CanvasTextRendererOptions.html" class="tsd-signature-type tsd-kind-interface">CanvasTextRendererOptions</a></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <a href="CanvasTextRenderer.html" class="tsd-signature-type tsd-kind-class">CanvasTextRenderer</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Transform.ts#L16">core/Transform.ts:16</a></li></ul></aside></li></ul></section></section>
+<li>Defined in core/CanvasTextRenderer.ts:20</li></ul></aside></li></ul></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Properties</h2>
-<section class="tsd-panel tsd-member"><a id="rotation" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><span>rotation</span><a href="#rotation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">rotation</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div><aside class="tsd-sources">
+<section class="tsd-panel tsd-member"><a id="canvas" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>canvas</span><a href="#canvas" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">canvas</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">HTMLCanvasElement</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Transform.ts#L11">core/Transform.ts:11</a></li></ul></aside></section>
-<section class="tsd-panel tsd-member"><a id="scaling" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><span>scaling</span><a href="#scaling" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">scaling</span><span class="tsd-signature-symbol">:</span> <a href="Vector.html" class="tsd-signature-type tsd-kind-class">Vector</a></div><aside class="tsd-sources">
+<li>Defined in core/CanvasTextRenderer.ts:15</li></ul></aside></section>
+<section class="tsd-panel tsd-member"><a id="ctx" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>ctx</span><a href="#ctx" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">ctx</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">CanvasRenderingContext2D</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Transform.ts#L12">core/Transform.ts:12</a></li></ul></aside></section>
-<section class="tsd-panel tsd-member tsd-is-private"><a id="transformed" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>transformed</span><a href="#transformed" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">transformed</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div><aside class="tsd-sources">
+<li>Defined in core/CanvasTextRenderer.ts:16</li></ul></aside></section>
+<section class="tsd-panel tsd-member"><a id="textBuffer" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>text<wbr/>Buffer</span><a href="#textBuffer" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">text<wbr/>Buffer</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span><br/><span>    </span><span class="tsd-kind-property">color</span><span class="tsd-signature-symbol">: </span><a href="Color.html" class="tsd-signature-type tsd-kind-class">Color</a><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">font</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">pos</span><span class="tsd-signature-symbol">: </span><a href="Vector.html" class="tsd-signature-type tsd-kind-class">Vector</a><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">text</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span><br/><span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div>
+<div class="tsd-type-declaration">
+<h4>Type declaration</h4>
+<ul class="tsd-parameters">
+<li class="tsd-parameter">
+<h5><span class="tsd-kind-property">color</span><span class="tsd-signature-symbol">: </span><a href="Color.html" class="tsd-signature-type tsd-kind-class">Color</a></h5></li>
+<li class="tsd-parameter">
+<h5><span class="tsd-kind-property">font</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5></li>
+<li class="tsd-parameter">
+<h5><span class="tsd-kind-property">pos</span><span class="tsd-signature-symbol">: </span><a href="Vector.html" class="tsd-signature-type tsd-kind-class">Vector</a></h5></li>
+<li class="tsd-parameter">
+<h5><span class="tsd-kind-property">text</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5></li></ul></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Transform.ts#L14">core/Transform.ts:14</a></li></ul></aside></section>
-<section class="tsd-panel tsd-member"><a id="translation" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><span>translation</span><a href="#translation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">translation</span><span class="tsd-signature-symbol">:</span> <a href="Vector.html" class="tsd-signature-type tsd-kind-class">Vector</a></div><aside class="tsd-sources">
-<ul>
-<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Transform.ts#L10">core/Transform.ts:10</a></li></ul></aside></section></section>
+<li>Defined in core/CanvasTextRenderer.ts:18</li></ul></aside></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Methods</h2>
-<section class="tsd-panel tsd-member"><a id="getMatrix" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><span>get<wbr/>Matrix</span><a href="#getMatrix" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<section class="tsd-panel tsd-member"><a id="clear" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>clear</span><a href="#clear" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
-<li class="tsd-signature tsd-anchor-link" id="getMatrix.getMatrix-1"><span class="tsd-kind-call-signature">get<wbr/>Matrix</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">Mat4</span><a href="#getMatrix.getMatrix-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
-<li class="tsd-description">
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Mat4</span></h4><aside class="tsd-sources">
-<ul>
-<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Transform.ts#L49">core/Transform.ts:49</a></li></ul></aside></li></ul></section>
-<section class="tsd-panel tsd-member"><a id="resetTransforms" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><span>reset<wbr/>Transforms</span><a href="#resetTransforms" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
-<ul class="tsd-signatures">
-<li class="tsd-signature tsd-anchor-link" id="resetTransforms.resetTransforms-1"><span class="tsd-kind-call-signature">reset<wbr/>Transforms</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#resetTransforms.resetTransforms-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="clear.clear-1"><span class="tsd-kind-call-signature">clear</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#clear.clear-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Transform.ts#L37">core/Transform.ts:37</a></li></ul></aside></li></ul></section>
-<section class="tsd-panel tsd-member"><a id="rotate" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><span>rotate</span><a href="#rotate" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<li>Defined in core/CanvasTextRenderer.ts:25</li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member"><a id="render" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>render</span><a href="#render" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
-<li class="tsd-signature tsd-anchor-link" id="rotate.rotate-1"><span class="tsd-kind-call-signature">rotate</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">rotation</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#rotate.rotate-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="render.render-1"><span class="tsd-kind-call-signature">render</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">camera</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#render.render-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">rotation</span>: <span class="tsd-signature-type">number</span></h5></li></ul></div>
+<h5><span class="tsd-kind-parameter">camera</span>: <a href="Camera.html" class="tsd-signature-type tsd-kind-class">Camera</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Transform.ts#L27">core/Transform.ts:27</a></li></ul></aside></li></ul></section>
-<section class="tsd-panel tsd-member"><a id="scale" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><span>scale</span><a href="#scale" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<li>Defined in core/CanvasTextRenderer.ts:37</li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member"><a id="renderText" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>render<wbr/>Text</span><a href="#renderText" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
-<li class="tsd-signature tsd-anchor-link" id="scale.scale-1"><span class="tsd-kind-call-signature">scale</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">scale</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#scale.scale-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="renderText.renderText-1"><span class="tsd-kind-call-signature">render<wbr/>Text</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">text</span>, <span class="tsd-kind-parameter">pos</span>, <span class="tsd-kind-parameter">color</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#renderText.renderText-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">scale</span>: <a href="Vector.html" class="tsd-signature-type tsd-kind-class">Vector</a></h5></li></ul></div>
+<h5><span class="tsd-kind-parameter">text</span>: <span class="tsd-signature-type">string</span></h5></li>
+<li>
+<h5><span class="tsd-kind-parameter">pos</span>: <a href="Vector.html" class="tsd-signature-type tsd-kind-class">Vector</a></h5></li>
+<li>
+<h5><span class="tsd-kind-parameter">color</span>: <a href="Color.html" class="tsd-signature-type tsd-kind-class">Color</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Transform.ts#L32">core/Transform.ts:32</a></li></ul></aside></li></ul></section>
-<section class="tsd-panel tsd-member"><a id="transformVertices" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><span>transform<wbr/>Vertices</span><a href="#transformVertices" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<li>Defined in core/CanvasTextRenderer.ts:33</li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member"><a id="setFont" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>set<wbr/>Font</span><a href="#setFont" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
-<li class="tsd-signature tsd-anchor-link" id="transformVertices.transformVertices-1"><span class="tsd-kind-call-signature">transform<wbr/>Vertices</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">vertices</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="Vertex.html" class="tsd-signature-type tsd-kind-class">Vertex</a><span class="tsd-signature-symbol">[]</span><a href="#transformVertices.transformVertices-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="setFont.setFont-1"><span class="tsd-kind-call-signature">set<wbr/>Font</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">font</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#setFont.setFont-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">vertices</span>: <a href="Vertex.html" class="tsd-signature-type tsd-kind-class">Vertex</a><span class="tsd-signature-symbol">[]</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <a href="Vertex.html" class="tsd-signature-type tsd-kind-class">Vertex</a><span class="tsd-signature-symbol">[]</span></h4><aside class="tsd-sources">
-<ul>
-<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Transform.ts#L44">core/Transform.ts:44</a></li></ul></aside></li></ul></section>
-<section class="tsd-panel tsd-member"><a id="translate" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><span>translate</span><a href="#translate" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
-<ul class="tsd-signatures">
-<li class="tsd-signature tsd-anchor-link" id="translate.translate-1"><span class="tsd-kind-call-signature">translate</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">translation</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#translate.translate-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
-<li class="tsd-description">
-<div class="tsd-parameters">
-<h4 class="tsd-parameters-title">Parameters</h4>
-<ul class="tsd-parameter-list">
-<li>
-<h5><span class="tsd-kind-parameter">translation</span>: <a href="Vector.html" class="tsd-signature-type tsd-kind-class">Vector</a></h5></li></ul></div>
+<h5><span class="tsd-kind-parameter">font</span>: <span class="tsd-signature-type">string</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Transform.ts#L22">core/Transform.ts:22</a></li></ul></aside></li></ul></section></section></div>
+<li>Defined in core/CanvasTextRenderer.ts:29</li></ul></aside></li></ul></section></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
@@ -172,28 +159,25 @@
 <div class="tsd-accordion-details">
 <ul>
 <li><a href="#constructor" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-512"></use></svg><span>constructor</span></a></li>
-<li><a href="#rotation" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>rotation</span></a></li>
-<li><a href="#scaling" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>scaling</span></a></li>
-<li><a href="#transformed" class="tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>transformed</span></a></li>
-<li><a href="#translation" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>translation</span></a></li>
-<li><a href="#getMatrix" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>get<wbr/>Matrix</span></a></li>
-<li><a href="#resetTransforms" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>reset<wbr/>Transforms</span></a></li>
-<li><a href="#rotate" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>rotate</span></a></li>
-<li><a href="#scale" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>scale</span></a></li>
-<li><a href="#transformVertices" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>transform<wbr/>Vertices</span></a></li>
-<li><a href="#translate" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>translate</span></a></li></ul></div></details></div>
+<li><a href="#canvas" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>canvas</span></a></li>
+<li><a href="#ctx" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>ctx</span></a></li>
+<li><a href="#textBuffer" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>text<wbr/>Buffer</span></a></li>
+<li><a href="#clear" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>clear</span></a></li>
+<li><a href="#render" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>render</span></a></li>
+<li><a href="#renderText" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>render<wbr/>Text</span></a></li>
+<li><a href="#setFont" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>set<wbr/>Font</span></a></li></ul></div></details></div>
 <div class="site-menu">
 <nav class="tsd-navigation"><a href="../modules.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1"></use></svg><span>polyly</span></a>
 <ul class="tsd-small-nested-navigation" id="tsd-nav-container" data-base="..">
 <li><a href="Buffer.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg>Buffer</a></li>
 <li><a href="BufferData.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg>BufferData</a></li>
 <li><a href="Camera.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg>Camera</a></li>
-<li><a href="CanvasTextRenderer.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg>CanvasTextRenderer</a></li>
+<li><a href="CanvasTextRenderer.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg>CanvasTextRenderer</a></li>
 <li><a href="Color.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg>Color</a></li>
 <li><a href="DynamicBuffer.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg>DynamicBuffer</a></li>
 <li><a href="Renderer.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg>Renderer</a></li>
 <li><a href="StaticBuffer.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg>StaticBuffer</a></li>
-<li><a href="Transform.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg>Transform</a></li>
+<li><a href="Transform.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg>Transform</a></li>
 <li><a href="Vector.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg>Vector</a></li>
 <li><a href="Vertex.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg>Vertex</a></li>
 <li><a href="../interfaces/BufferDataOptions.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg>BufferDataOptions</a></li>

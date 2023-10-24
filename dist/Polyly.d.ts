@@ -1,4 +1,5 @@
 export { Renderer } from "./core/Renderer.ts";
+export { CanvasTextRenderer } from "./core/CanvasTextRenderer.ts";
 export { DynamicBuffer } from "./buffers/DynamicBuffer.ts";
 export { StaticBuffer } from "./buffers/StaticBuffer.ts";
 export { Buffer } from "./buffers/Buffer.ts";
@@ -12,3 +13,4 @@ export type { RendererOptions } from "./core/Renderer.ts";
 export type { DynamicBufferOptions } from "./buffers/DynamicBuffer.ts";
 export type { BufferDataOptions } from "./buffers/BufferData.ts";
 export type { StrokePathOptions } from "./core/Renderer.ts";
+export type { CanvasTextRendererOptions } from "./core/CanvasTextRenderer.ts";

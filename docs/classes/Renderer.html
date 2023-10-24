@@ -24,7 +24,7 @@
 <ul class="tsd-hierarchy">
 <li><span class="target">Renderer</span></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/5e9a283/src/core/Renderer.ts#L40">core/Renderer.ts:40</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Renderer.ts#L45">core/Renderer.ts:45</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -37,11 +37,13 @@
 <section class="tsd-index-section">
 <h3 class="tsd-index-heading">Properties</h3>
 <div class="tsd-index-list"><a href="Renderer.html#buffers" class="tsd-index-link tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>buffers</span></a>
+<a href="Renderer.html#camera" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>camera</span></a>
 <a href="Renderer.html#canvas" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>canvas</span></a>
 <a href="Renderer.html#currentBufferIndex" class="tsd-index-link tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>current<wbr/>Buffer<wbr/>Index</span></a>
 <a href="Renderer.html#currentPath" class="tsd-index-link tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>current<wbr/>Path</span></a>
 <a href="Renderer.html#gl" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>gl</span></a>
 <a href="Renderer.html#shaderProgramInfo" class="tsd-index-link tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>shader<wbr/>Program<wbr/>Info</span></a>
+<a href="Renderer.html#textRenderer" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>text<wbr/>Renderer</span></a>
 <a href="Renderer.html#transform" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>transform</span></a>
 </div></section>
 <section class="tsd-index-section">
@@ -55,8 +57,10 @@
 <a href="Renderer.html#path" class="tsd-index-link tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>path</span></a>
 <a href="Renderer.html#rect" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>rect</span></a>
 <a href="Renderer.html#render" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>render</span></a>
+<a href="Renderer.html#renderText" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>render<wbr/>Text</span></a>
 <a href="Renderer.html#resizeCanvas" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>resize<wbr/>Canvas</span></a>
 <a href="Renderer.html#setBuffer" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>set<wbr/>Buffer</span></a>
+<a href="Renderer.html#setFont" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>set<wbr/>Font</span></a>
 <a href="Renderer.html#strokePath" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>stroke<wbr/>Path</span></a>
 <a href="Renderer.html#vertex" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>vertex</span></a>
 <a href="Renderer.html#vertices" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>vertices</span></a>
@@ -79,14 +83,22 @@
 <h4 class="tsd-returns-title">Returns <a href="Renderer.html" class="tsd-signature-type tsd-kind-class">Renderer</a></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/5e9a283/src/core/Renderer.ts#L56">core/Renderer.ts:56</a></li></ul></aside></li></ul></section></section>
+<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Renderer.ts#L65">core/Renderer.ts:65</a></li></ul></aside></li></ul></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Properties</h2>
 <section class="tsd-panel tsd-member tsd-is-private"><a id="buffers" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>buffers</span><a href="#buffers" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">buffers</span><span class="tsd-signature-symbol">:</span> <a href="Buffer.html" class="tsd-signature-type tsd-kind-class">Buffer</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/5e9a283/src/core/Renderer.ts#L49">core/Renderer.ts:49</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Renderer.ts#L58">core/Renderer.ts:58</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member"><a id="camera" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>camera</span><a href="#camera" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">camera</span><span class="tsd-signature-symbol">:</span> <a href="Camera.html" class="tsd-signature-type tsd-kind-class">Camera</a></div>
+<div class="tsd-comment tsd-typography"><p>The camera to render with</p>
+</div>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Renderer.ts#L53">core/Renderer.ts:53</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="canvas" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>canvas</span><a href="#canvas" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">canvas</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">HTMLCanvasElement</span></div>
@@ -94,17 +106,17 @@
 </div>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/5e9a283/src/core/Renderer.ts#L42">core/Renderer.ts:42</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Renderer.ts#L47">core/Renderer.ts:47</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-private"><a id="currentBufferIndex" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>current<wbr/>Buffer<wbr/>Index</span><a href="#currentBufferIndex" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">current<wbr/>Buffer<wbr/>Index</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 0</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/5e9a283/src/core/Renderer.ts#L50">core/Renderer.ts:50</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Renderer.ts#L59">core/Renderer.ts:59</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-private"><a id="currentPath" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>current<wbr/>Path</span><a href="#currentPath" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">current<wbr/>Path</span><span class="tsd-signature-symbol">:</span> <a href="Vertex.html" class="tsd-signature-type tsd-kind-class">Vertex</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/5e9a283/src/core/Renderer.ts#L51">core/Renderer.ts:51</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Renderer.ts#L60">core/Renderer.ts:60</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="gl" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>gl</span><a href="#gl" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">gl</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">WebGL2RenderingContext</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type ">WebGLRenderingContext</span></div>
@@ -112,12 +124,20 @@
 </div>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/5e9a283/src/core/Renderer.ts#L44">core/Renderer.ts:44</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Renderer.ts#L49">core/Renderer.ts:49</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-private"><a id="shaderProgramInfo" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>shader<wbr/>Program<wbr/>Info</span><a href="#shaderProgramInfo" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">shader<wbr/>Program<wbr/>Info</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">ProgramInfo</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/5e9a283/src/core/Renderer.ts#L48">core/Renderer.ts:48</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Renderer.ts#L57">core/Renderer.ts:57</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member"><a id="textRenderer" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>text<wbr/>Renderer</span><a href="#textRenderer" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">text<wbr/>Renderer</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="CanvasTextRenderer.html" class="tsd-signature-type tsd-kind-class">CanvasTextRenderer</a></div>
+<div class="tsd-comment tsd-typography"><p>The text renderer</p>
+</div>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Renderer.ts#L55">core/Renderer.ts:55</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="transform" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>transform</span><a href="#transform" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">transform</span><span class="tsd-signature-symbol">:</span> <a href="Transform.html" class="tsd-signature-type tsd-kind-class">Transform</a></div>
@@ -125,7 +145,7 @@
 </div>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/5e9a283/src/core/Renderer.ts#L46">core/Renderer.ts:46</a></li></ul></aside></section></section>
+<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Renderer.ts#L51">core/Renderer.ts:51</a></li></ul></aside></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Methods</h2>
 <section class="tsd-panel tsd-member"><a id="arc" class="tsd-anchor"></a>
@@ -166,7 +186,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/5e9a283/src/core/Renderer.ts#L220">core/Renderer.ts:220</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Renderer.ts#L253">core/Renderer.ts:253</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="beginPath" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>begin<wbr/>Path</span><a href="#beginPath" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -177,7 +197,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/5e9a283/src/core/Renderer.ts#L176">core/Renderer.ts:176</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Renderer.ts#L209">core/Renderer.ts:209</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="clear" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>clear</span><a href="#clear" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -196,7 +216,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/5e9a283/src/core/Renderer.ts#L124">core/Renderer.ts:124</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Renderer.ts#L155">core/Renderer.ts:155</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="fillPath" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>fill<wbr/>Path</span><a href="#fillPath" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -207,7 +227,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/5e9a283/src/core/Renderer.ts#L287">core/Renderer.ts:287</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Renderer.ts#L320">core/Renderer.ts:320</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="getDisplaySize" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>get<wbr/>Display<wbr/>Size</span><a href="#getDisplaySize" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -218,7 +238,7 @@
 <h4 class="tsd-returns-title">Returns <a href="Vector.html" class="tsd-signature-type tsd-kind-class">Vector</a></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/5e9a283/src/core/Renderer.ts#L326">core/Renderer.ts:326</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Renderer.ts#L383">core/Renderer.ts:383</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="line" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>line</span><a href="#line" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -252,7 +272,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/5e9a283/src/core/Renderer.ts#L136">core/Renderer.ts:136</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Renderer.ts#L169">core/Renderer.ts:169</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-private"><a id="path" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>path</span><a href="#path" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-private">
@@ -269,7 +289,7 @@
 <h5><span class="tsd-kind-parameter">closed</span>: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/5e9a283/src/core/Renderer.ts#L145">core/Renderer.ts:145</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Renderer.ts#L178">core/Renderer.ts:178</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="rect" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>rect</span><a href="#rect" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -298,26 +318,42 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/5e9a283/src/core/Renderer.ts#L237">core/Renderer.ts:237</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Renderer.ts#L270">core/Renderer.ts:270</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="render" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>render</span><a href="#render" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
-<li class="tsd-signature tsd-anchor-link" id="render.render-1"><span class="tsd-kind-call-signature">render</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">camera</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#render.render-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="render.render-1"><span class="tsd-kind-call-signature">render</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#render.render-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>The main render function. Call this every frame once to render everything.</p>
 </div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Renderer.ts#L353">core/Renderer.ts:353</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member"><a id="renderText" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>render<wbr/>Text</span><a href="#renderText" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures">
+<li class="tsd-signature tsd-anchor-link" id="renderText.renderText-1"><span class="tsd-kind-call-signature">render<wbr/>Text</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">text</span>, <span class="tsd-kind-parameter">pos</span>, <span class="tsd-kind-parameter">color</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#renderText.renderText-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-description">
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">camera</span>: <a href="Camera.html" class="tsd-signature-type tsd-kind-class">Camera</a></h5>
-<div class="tsd-comment tsd-typography"><p>The camera to render with</p>
+<h5><span class="tsd-kind-parameter">text</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The text to render</p>
 </div>
-<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<div class="tsd-comment tsd-typography"></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">pos</span>: <a href="Vector.html" class="tsd-signature-type tsd-kind-class">Vector</a></h5>
+<div class="tsd-comment tsd-typography"><p>The position to render the text at</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">color</span>: <a href="Color.html" class="tsd-signature-type tsd-kind-class">Color</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/5e9a283/src/core/Renderer.ts#L299">core/Renderer.ts:299</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Renderer.ts#L344">core/Renderer.ts:344</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="resizeCanvas" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>resize<wbr/>Canvas</span><a href="#resizeCanvas" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -337,7 +373,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/5e9a283/src/core/Renderer.ts#L97">core/Renderer.ts:97</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Renderer.ts#L128">core/Renderer.ts:128</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="setBuffer" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>set<wbr/>Buffer</span><a href="#setBuffer" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -356,7 +392,29 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/5e9a283/src/core/Renderer.ts#L107">core/Renderer.ts:107</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Renderer.ts#L138">core/Renderer.ts:138</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member"><a id="setFont" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>set<wbr/>Font</span><a href="#setFont" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures">
+<li class="tsd-signature tsd-anchor-link" id="setFont.setFont-1"><span class="tsd-kind-call-signature">set<wbr/>Font</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">font</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#setFont.setFont-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Sets the font of the text renderer</p>
+</div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">font</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The font to set</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography">
+<h4>Example</h4><pre><code class="language-ts"><span class="hl-0">renderer</span><span class="hl-1">.</span><span class="hl-6">setFont</span><span class="hl-1">(</span><span class="hl-4">&quot;30px Arial&quot;</span><span class="hl-1">);</span>
+</code><button>Copy</button></pre>
+</div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Renderer.ts#L333">core/Renderer.ts:333</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="strokePath" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>stroke<wbr/>Path</span><a href="#strokePath" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -380,7 +438,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/5e9a283/src/core/Renderer.ts#L247">core/Renderer.ts:247</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Renderer.ts#L280">core/Renderer.ts:280</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="vertex" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>vertex</span><a href="#vertex" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -400,7 +458,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/5e9a283/src/core/Renderer.ts#L185">core/Renderer.ts:185</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Renderer.ts#L218">core/Renderer.ts:218</a></li></ul></aside></li>
 <li class="tsd-signature tsd-anchor-link" id="vertex.vertex-2"><span class="tsd-kind-call-signature">vertex</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">vertex</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#vertex.vertex-2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-parameters">
@@ -410,7 +468,7 @@
 <h5><span class="tsd-kind-parameter">vertex</span>: <a href="Vertex.html" class="tsd-signature-type tsd-kind-class">Vertex</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/5e9a283/src/core/Renderer.ts#L186">core/Renderer.ts:186</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Renderer.ts#L219">core/Renderer.ts:219</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="vertices" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>vertices</span><a href="#vertices" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -429,7 +487,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/5e9a283/src/core/Renderer.ts#L201">core/Renderer.ts:201</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Renderer.ts#L234">core/Renderer.ts:234</a></li></ul></aside></li>
 <li class="tsd-signature tsd-anchor-link" id="vertices.vertices-2"><span class="tsd-kind-call-signature">vertices</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">vertices</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#vertices.vertices-2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-parameters">
@@ -439,7 +497,7 @@
 <h5><span class="tsd-kind-parameter">vertices</span>: <a href="Vertex.html" class="tsd-signature-type tsd-kind-class">Vertex</a><span class="tsd-signature-symbol">[]</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/5e9a283/src/core/Renderer.ts#L202">core/Renderer.ts:202</a></li></ul></aside></li></ul></section></section></div>
+<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Renderer.ts#L235">core/Renderer.ts:235</a></li></ul></aside></li></ul></section></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
@@ -461,11 +519,13 @@
 <ul>
 <li><a href="#constructor" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-512"></use></svg><span>constructor</span></a></li>
 <li><a href="#buffers" class="tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>buffers</span></a></li>
+<li><a href="#camera" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>camera</span></a></li>
 <li><a href="#canvas" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>canvas</span></a></li>
 <li><a href="#currentBufferIndex" class="tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>current<wbr/>Buffer<wbr/>Index</span></a></li>
 <li><a href="#currentPath" class="tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>current<wbr/>Path</span></a></li>
 <li><a href="#gl" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>gl</span></a></li>
 <li><a href="#shaderProgramInfo" class="tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>shader<wbr/>Program<wbr/>Info</span></a></li>
+<li><a href="#textRenderer" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>text<wbr/>Renderer</span></a></li>
 <li><a href="#transform" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>transform</span></a></li>
 <li><a href="#arc" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>arc</span></a></li>
 <li><a href="#beginPath" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>begin<wbr/>Path</span></a></li>
@@ -476,8 +536,10 @@
 <li><a href="#path" class="tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>path</span></a></li>
 <li><a href="#rect" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>rect</span></a></li>
 <li><a href="#render" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>render</span></a></li>
+<li><a href="#renderText" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>render<wbr/>Text</span></a></li>
 <li><a href="#resizeCanvas" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>resize<wbr/>Canvas</span></a></li>
 <li><a href="#setBuffer" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>set<wbr/>Buffer</span></a></li>
+<li><a href="#setFont" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>set<wbr/>Font</span></a></li>
 <li><a href="#strokePath" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>stroke<wbr/>Path</span></a></li>
 <li><a href="#vertex" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>vertex</span></a></li>
 <li><a href="#vertices" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>vertices</span></a></li></ul></div></details></div>
@@ -487,6 +549,7 @@
 <li><a href="Buffer.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg>Buffer</a></li>
 <li><a href="BufferData.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg>BufferData</a></li>
 <li><a href="Camera.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg>Camera</a></li>
+<li><a href="CanvasTextRenderer.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg>CanvasTextRenderer</a></li>
 <li><a href="Color.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg>Color</a></li>
 <li><a href="DynamicBuffer.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg>DynamicBuffer</a></li>
 <li><a href="Renderer.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg>Renderer</a></li>
@@ -495,6 +558,7 @@
 <li><a href="Vector.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg>Vector</a></li>
 <li><a href="Vertex.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg>Vertex</a></li>
 <li><a href="../interfaces/BufferDataOptions.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg>BufferDataOptions</a></li>
+<li><a href="../interfaces/CanvasTextRendererOptions.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg>CanvasTextRendererOptions</a></li>
 <li><a href="../interfaces/DynamicBufferOptions.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg>DynamicBufferOptions</a></li>
 <li><a href="../interfaces/RendererOptions.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg>RendererOptions</a></li>
 <li><a href="../interfaces/StrokePathOptions.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg>StrokePathOptions</a></li>

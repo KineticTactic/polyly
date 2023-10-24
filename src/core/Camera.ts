@@ -71,6 +71,19 @@ export class Camera {
     }
 
     /**
+     * Converts a vector (position) in world space into screen space
+     * @param vector
+     * @returns The Vector converted to Screen space
+     */
+    public worldSpaceToScreenSpace(vector: Vector) {
+        const factor = window.innerHeight / this.zoom;
+
+        const x = interpolate(vector.x, -this.aspect * factor, this.aspect * factor, 0, window.innerWidth) - this.pos.x;
+        const y = interpolate(vector.y, -1 * factor, 1 * factor, 0, window.innerHeight) - this.pos.y;
+        return new Vector(x, y);
+    }
+
+    /**
      * Returns the camera matrix
      * @returns The camera matrix
      */

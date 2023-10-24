@@ -19,4 +19,9 @@ export default defineConfig({
     rollupOptions: {
         external: ["twgl.js"],
     },
+    optimizeDeps: {
+        esbuildOptions: {
+            target: "esnext",
+        },
+    },
 });

@@ -8,6 +8,7 @@ import { Vector } from "../util/Vector";
 import { Color } from "../util/Color";
 import { calculateSidewaysVertices, calculateVertexPoints } from "../util/math";
 import { Transform } from "./Transform";
+import { CanvasTextRenderer } from "./CanvasTextRenderer";
 
 /**
  * Options for passing to the Renderer constructor
@@ -18,6 +19,10 @@ export interface RendererOptions {
     canvas?: HTMLCanvasElement;
     /** The WebGL version to use. */
     webglVersion?: 1 | 2;
+    /** Whether to initialize the text renderer. If you don't need to render text, you can set this to false to save some performance. */
+    initTextRenderer?: boolean;
+    /** The camera to render with. If not specified, the renderer will render with a default camera. */
+    camera?: Camera;
 }
 
 /**
@@ -44,6 +49,10 @@ export class Renderer {
     public gl: WebGLRenderingContext | WebGL2RenderingContext;
     /** The global transform */
     public transform: Transform;
+    /** The camera to render with */
+    public camera: Camera;
+    /** The text renderer */
+    public textRenderer: CanvasTextRenderer | null;
 
     private shaderProgramInfo: twgl.ProgramInfo;
     private buffers: Buffer[] = [];
@@ -72,6 +81,28 @@ export class Renderer {
         if (!gl) throw new Error("WebGL not supported");
 
         this.gl = gl;
+
+        // Init text renderer if needed
+        if (options.initTextRenderer) {
+            const textCanvas = document.createElement("canvas");
+            textCanvas.width = window.innerWidth;
+            textCanvas.height = window.innerHeight;
+            this.canvas.parentElement!.appendChild(textCanvas);
+            textCanvas.style.position = "absolute";
+            textCanvas.style.top = "0";
+            textCanvas.style.left = "0";
+            this.textRenderer = new CanvasTextRenderer({ canvas: textCanvas });
+        } else {
+            this.textRenderer = null;
+        }
+
+        // Camera
+        if (options.camera) {
+            this.camera = options.camera;
+            this.camera.setDisplaySize(new Vector(this.canvas.width, this.canvas.height));
+        } else {
+            this.camera = new Camera(new Vector(this.canvas.width, this.canvas.height));
+        }
 
         // Create shader program
         this.shaderProgramInfo = twgl.createProgramInfo(this.gl, [Shader.vertexShader, Shader.fragmentShader]);
@@ -124,6 +155,8 @@ export class Renderer {
     public clear(color: Color = new Color(0, 0, 0, 255)) {
         this.gl.clearColor(color.r / 255, color.g / 255, color.b / 255, color.a / 255);
         this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
+
+        if (this.textRenderer) this.textRenderer.clear();
     }
 
     /**
@@ -293,16 +326,37 @@ export class Renderer {
     }
 
     /**
+     * Sets the font of the text renderer
+     * @param font The font to set
+     * @example renderer.setFont("30px Arial");
+     */
+    public setFont(font: string) {
+        if (!this.textRenderer) throw new Error("Text renderer not initialized!");
+        this.textRenderer.setFont(font);
+    }
+
+    /**
+     *
+     * @param text The text to render
+     * @param pos The position to render the text at
+     * @param maxWidth Max width of the text
+     */
+    public renderText(text: string, pos: Vector, color: Color) {
+        if (!this.textRenderer) throw new Error("Text renderer not initialized!");
+        this.textRenderer.renderText(text, pos, color);
+    }
+
+    /**
      * The main render function. Call this every frame once to render everything.
      * @param camera The camera to render with
      */
-    public render(camera: Camera): void {
+    public render(): void {
         this.buffers[0].update();
 
         // Update uniforms
         const uniforms = {
             resolution: [this.gl.canvas.width, this.gl.canvas.height],
-            viewProjectionMatrix: camera ? camera.getMatrix() : twgl.m4.identity(),
+            viewProjectionMatrix: this.camera.getMatrix(),
         };
 
         this.gl.useProgram(this.shaderProgramInfo.program);
@@ -318,6 +372,9 @@ export class Renderer {
 
         // Reset
         this.buffers[0].reset();
+
+        // Render text
+        if (this.textRenderer) this.textRenderer.render(this.camera);
     }
 
     /**

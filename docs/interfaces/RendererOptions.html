@@ -24,7 +24,7 @@
 <ul class="tsd-hierarchy">
 <li><span class="target">RendererOptions</span></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/5e9a283/src/core/Renderer.ts#L16">core/Renderer.ts:16</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Renderer.ts#L17">core/Renderer.ts:17</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -32,11 +32,21 @@
 <div class="tsd-accordion-details">
 <section class="tsd-index-section">
 <h3 class="tsd-index-heading">Properties</h3>
-<div class="tsd-index-list"><a href="RendererOptions.html#canvas" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>canvas?</span></a>
+<div class="tsd-index-list"><a href="RendererOptions.html#camera" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>camera?</span></a>
+<a href="RendererOptions.html#canvas" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>canvas?</span></a>
+<a href="RendererOptions.html#initTextRenderer" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>init<wbr/>Text<wbr/>Renderer?</span></a>
 <a href="RendererOptions.html#webglVersion" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>webgl<wbr/>Version?</span></a>
 </div></section></div></details></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Properties</h2>
+<section class="tsd-panel tsd-member"><a id="camera" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>camera</span><a href="#camera" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">camera</span><span class="tsd-signature-symbol">?:</span> <a href="../classes/Camera.html" class="tsd-signature-type tsd-kind-class">Camera</a></div>
+<div class="tsd-comment tsd-typography"><p>The camera to render with. If not specified, the renderer will render with a default camera.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Renderer.ts#L25">core/Renderer.ts:25</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="canvas" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>canvas</span><a href="#canvas" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">canvas</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type ">HTMLCanvasElement</span></div>
@@ -44,7 +54,15 @@
 </div>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/5e9a283/src/core/Renderer.ts#L18">core/Renderer.ts:18</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Renderer.ts#L19">core/Renderer.ts:19</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member"><a id="initTextRenderer" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>init<wbr/>Text<wbr/>Renderer</span><a href="#initTextRenderer" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">init<wbr/>Text<wbr/>Renderer</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span></div>
+<div class="tsd-comment tsd-typography"><p>Whether to initialize the text renderer. If you don&#39;t need to render text, you can set this to false to save some performance.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Renderer.ts#L23">core/Renderer.ts:23</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="webglVersion" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>webgl<wbr/>Version</span><a href="#webglVersion" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">webgl<wbr/>Version</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">1</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">2</span></div>
@@ -52,7 +70,7 @@
 </div>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/5e9a283/src/core/Renderer.ts#L20">core/Renderer.ts:20</a></li></ul></aside></section></section></div>
+<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/0d0a96b/src/core/Renderer.ts#L21">core/Renderer.ts:21</a></li></ul></aside></section></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
@@ -72,7 +90,9 @@
 <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg>On This Page</h3></summary>
 <div class="tsd-accordion-details">
 <ul>
+<li><a href="#camera" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>camera</span></a></li>
 <li><a href="#canvas" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>canvas</span></a></li>
+<li><a href="#initTextRenderer" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>init<wbr/>Text<wbr/>Renderer</span></a></li>
 <li><a href="#webglVersion" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>webgl<wbr/>Version</span></a></li></ul></div></details></div>
 <div class="site-menu">
 <nav class="tsd-navigation"><a href="../modules.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1"></use></svg><span>polyly</span></a>
@@ -80,6 +100,7 @@
 <li><a href="../classes/Buffer.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg>Buffer</a></li>
 <li><a href="../classes/BufferData.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg>BufferData</a></li>
 <li><a href="../classes/Camera.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg>Camera</a></li>
+<li><a href="../classes/CanvasTextRenderer.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg>CanvasTextRenderer</a></li>
 <li><a href="../classes/Color.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg>Color</a></li>
 <li><a href="../classes/DynamicBuffer.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg>DynamicBuffer</a></li>
 <li><a href="../classes/Renderer.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg>Renderer</a></li>
@@ -88,6 +109,7 @@
 <li><a href="../classes/Vector.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg>Vector</a></li>
 <li><a href="../classes/Vertex.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg>Vertex</a></li>
 <li><a href="BufferDataOptions.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg>BufferDataOptions</a></li>
+<li><a href="CanvasTextRendererOptions.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg>CanvasTextRendererOptions</a></li>
 <li><a href="DynamicBufferOptions.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg>DynamicBufferOptions</a></li>
 <li><a href="RendererOptions.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg>RendererOptions</a></li>
 <li><a href="StrokePathOptions.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg>StrokePathOptions</a></li>

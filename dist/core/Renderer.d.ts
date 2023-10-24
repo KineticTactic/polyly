@@ -4,6 +4,7 @@ import { Buffer } from "../buffers/Buffer";
 import { Vector } from "../util/Vector";
 import { Color } from "../util/Color";
 import { Transform } from "./Transform";
+import { CanvasTextRenderer } from "./CanvasTextRenderer";
 /**
  * Options for passing to the Renderer constructor
  * @category Core
@@ -13,6 +14,10 @@ export interface RendererOptions {
     canvas?: HTMLCanvasElement;
     /** The WebGL version to use. */
     webglVersion?: 1 | 2;
+    /** Whether to initialize the text renderer. If you don't need to render text, you can set this to false to save some performance. */
+    initTextRenderer?: boolean;
+    /** The camera to render with. If not specified, the renderer will render with a default camera. */
+    camera?: Camera;
 }
 /**
  * Options for passing to the strokePath function
@@ -37,6 +42,10 @@ export declare class Renderer {
     gl: WebGLRenderingContext | WebGL2RenderingContext;
     /** The global transform */
     transform: Transform;
+    /** The camera to render with */
+    camera: Camera;
+    /** The text renderer */
+    textRenderer: CanvasTextRenderer | null;
     private shaderProgramInfo;
     private buffers;
     private currentBufferIndex;
@@ -115,10 +124,23 @@ export declare class Renderer {
      */
     fillPath(): void;
     /**
+     * Sets the font of the text renderer
+     * @param font The font to set
+     * @example renderer.setFont("30px Arial");
+     */
+    setFont(font: string): void;
+    /**
+     *
+     * @param text The text to render
+     * @param pos The position to render the text at
+     * @param maxWidth Max width of the text
+     */
+    renderText(text: string, pos: Vector, color: Color): void;
+    /**
      * The main render function. Call this every frame once to render everything.
      * @param camera The camera to render with
      */
-    render(camera: Camera): void;
+    render(): void;
     /**
      * Returns the size of the canvas
      */

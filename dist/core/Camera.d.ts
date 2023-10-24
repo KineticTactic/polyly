@@ -35,6 +35,12 @@ export declare class Camera {
      */
     screenSpaceToWorldSpace(vector: Vector): Vector;
     /**
+     * Converts a vector (position) in world space into screen space
+     * @param vector
+     * @returns The Vector converted to Screen space
+     */
+    worldSpaceToScreenSpace(vector: Vector): Vector;
+    /**
      * Returns the camera matrix
      * @returns The camera matrix
      */

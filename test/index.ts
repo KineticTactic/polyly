@@ -2,8 +2,7 @@ import "./style.css";
 
 import * as Polyly from "../src/Polyly";
 
-const renderer = new Polyly.Renderer({ webglVersion: 2 });
-const camera = new Polyly.Camera(renderer.getDisplaySize());
+const renderer = new Polyly.Renderer({ webglVersion: 2, initTextRenderer: true });
 
 renderer.clear();
 
@@ -13,7 +12,7 @@ renderer.transform.scale(new Polyly.Vector(0.5, 0.5));
 renderer.line(new Polyly.Vector(0, 0), new Polyly.Vector(100, 100), 10, new Polyly.Color(100, 0, 0, 255));
 renderer.line(new Polyly.Vector(-10, 30), new Polyly.Vector(-100, 150), 10, new Polyly.Color(0, 255, 15, 255));
 
-camera.setZoom(2);
+renderer.camera.setZoom(2);
 
 renderer.beginPath();
 renderer.vertex(new Polyly.Vector(-400, -100), new Polyly.Color(255, 25, 0, 255));
@@ -50,4 +49,8 @@ renderer.beginPath();
 renderer.rect(new Polyly.Vector(0, 0), new Polyly.Vector(100, 100), new Polyly.Color(255, 0, 0, 255));
 renderer.fillPath();
 
-renderer.render(camera);
+renderer.renderText("Hellooo World!", new Polyly.Vector(100, 100), Polyly.Color.WHITE);
+renderer.setFont("30px Arial");
+renderer.renderText("THE quick Brown Fox ", new Polyly.Vector(-100, 0), Polyly.Color.WHITE);
+
+renderer.render();
