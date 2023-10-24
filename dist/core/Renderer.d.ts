@@ -104,8 +104,9 @@ export declare class Renderer {
      * @param startAngle The starting angle of the arc
      * @param endAngle The ending angle of the arc
      * @param color The color of the arc
+     * @param detail The detail of the arc. Higher values = smoother arc. Defaults to `1`
      */
-    arc(pos: Vector, radius: number, startAngle: number, endAngle: number, color: Color): void;
+    arc(pos: Vector, radius: number, startAngle: number, endAngle: number, color: Color, detail?: number): void;
     /**
      * Draws a rectangle (to the current path).
      * @param pos The position of the top left corner of the rectangle

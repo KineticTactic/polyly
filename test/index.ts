@@ -32,7 +32,7 @@ const buffer = new Polyly.StaticBuffer(renderer.gl);
 renderer.setBuffer(buffer);
 
 renderer.beginPath();
-renderer.arc(new Polyly.Vector(0, 0), 100, 0, (Math.PI * 6) / 4, new Polyly.Color(255, 0, 0, 160));
+renderer.arc(new Polyly.Vector(0, 0), 400, 0, (Math.PI * 6) / 4, new Polyly.Color(255, 0, 0, 160));
 renderer.vertex(new Polyly.Vector(0, 0), new Polyly.Color(255, 0, 255, 255));
 renderer.arc(new Polyly.Vector(200, 0), 100, 0, (Math.PI * 6) / 4, new Polyly.Color(255, 150, 0, 160));
 renderer.strokePath(5, { closed: true });
@@ -44,6 +44,10 @@ buffer.transform.rotate(0.7);
 buffer.transform.scale(new Polyly.Vector(0.5, 0.5));
 
 renderer.setBuffer(0);
+
+renderer.beginPath();
+renderer.arc(new Polyly.Vector(200, -200), 200, 0, Math.PI * 2, new Polyly.Color(0, 255, 255, 255), 0.5);
+renderer.strokePath(5, { closed: true });
 
 renderer.beginPath();
 renderer.rect(new Polyly.Vector(0, 0), new Polyly.Vector(100, 100), new Polyly.Color(255, 0, 0, 255));

@@ -249,9 +249,10 @@ export class Renderer {
      * @param startAngle The starting angle of the arc
      * @param endAngle The ending angle of the arc
      * @param color The color of the arc
+     * @param detail The detail of the arc. Higher values = smoother arc. Defaults to `1`
      */
-    public arc(pos: Vector, radius: number, startAngle: number, endAngle: number, color: Color) {
-        const numSegments = 40;
+    public arc(pos: Vector, radius: number, startAngle: number, endAngle: number, color: Color, detail = 1) {
+        const numSegments = (Math.PI * 2 * radius * detail) / 20;
         const angleStep = (endAngle - startAngle) / numSegments;
         const vertices = [];
         for (let i = 0; i <= numSegments; i++) {
