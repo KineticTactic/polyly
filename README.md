@@ -2,7 +2,7 @@
 
 A WebGL based fast 2D primitives renderer.
 
-[API Documentation](https://kinetictactic.github.io/polyly/index.html) | [NPM](https://npmjs.com/package/polyly) 
+[API Documentation](https://kinetictactic.github.io/polyly/index.html) | [NPM](https://npmjs.com/package/polyly)
 
 ## Install
 
@@ -69,7 +69,7 @@ renderer.fillPath();
 
 ### Fill and stroke
 
-`Renderer.strokePath(width, strokePathOptions?)`
+`Renderer.stroke(width, strokeOptions?)`
 
 Strokes (outlines) every single path or shape added since the last `Renderer.beginPath()` call.
 
@@ -77,7 +77,7 @@ Strokes (outlines) every single path or shape added since the last `Renderer.beg
 renderer.strokePath(10, { closed: true, dashed: true, dashLength: 15 });
 ```
 
-`Renderer.fillPath()`
+`Renderer.fill()`
 
 Fills every single path or shapes added since the last `Renderer.beginPath()` call.
 
@@ -87,4 +87,4 @@ renderer.fillPath();
 
 ## Why another rendering library?
 
-I had to write a basic 2D renderer for one of my other projects ([light-playground](https://github.com/KineticTactic/light-playground)) as HTML5 Canvas was too slow for my needs.  I also wanted the API to be similar to the Canvas API for its dynamic capabilities and ease of use. So I ended up converting it into a seperate 2D rendering library.
+I had to write a basic 2D renderer for one of my other projects ([light-playground](https://github.com/KineticTactic/light-playground)) as HTML5 Canvas was too slow for my needs. I also wanted the API to be similar to the Canvas API for its dynamic capabilities and ease of use. So I ended up converting it into a seperate 2D rendering library.

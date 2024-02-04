@@ -62,7 +62,7 @@ export class StaticBuffer extends Buffer {
     }
 
     public render(shaderProgramInfo: twgl.ProgramInfo): void {
-        if (!this.buffer) throw new Error("Buffer not initialized! Run buffer.updateBuffer()");
+        if (!this.buffer) throw new Error("Buffer not initialized! Run buffer.update()");
 
         twgl.setUniforms(shaderProgramInfo, {
             modelMatrix: this.transform.getMatrix(),

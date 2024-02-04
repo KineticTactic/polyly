@@ -22,5 +22,6 @@ export declare class CanvasTextRenderer {
     clear(): void;
     setFont(font: string): void;
     renderText(text: string, pos: Vector, color: Color): void;
+    setTextAlign(align: CanvasTextAlign): void;
     render(camera: Camera): void;
 }

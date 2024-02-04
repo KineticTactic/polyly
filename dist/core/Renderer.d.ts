@@ -23,7 +23,7 @@ export interface RendererOptions {
  * Options for passing to the strokePath function
  * @category Core
  */
-export interface StrokePathOptions {
+export interface StrokeOptions {
     /** Whether to close the path (join the first and last vertex) */
     closed?: boolean;
     /** Whether to render the path as a dashed line */
@@ -46,6 +46,8 @@ export declare class Renderer {
     camera: Camera;
     /** The text renderer */
     textRenderer: CanvasTextRenderer | null;
+    /** The default vertex color */
+    vertexColor: Color;
     private shaderProgramInfo;
     private buffers;
     private currentBufferIndex;
@@ -78,7 +80,13 @@ export declare class Renderer {
      * @param color Color of the line
      */
     line(startPos: Vector, endPos: Vector, width: number, color: Color): void;
-    private path;
+    private buildPath;
+    private buildDashedPath;
+    /**
+     * Sets the default vertex color
+     * @param color The color to set
+     */
+    setVertexColor(color: Color): void;
     /**
      * Starts a new path by clearing everything in the current path. Call this before using any drawing methods.
      */
@@ -88,6 +96,7 @@ export declare class Renderer {
      * @param pos
      * @param color
      */
+    vertex(pos: Vector): void;
     vertex(pos: Vector, color: Color): void;
     vertex(vertex: Vertex): void;
     /**
@@ -96,7 +105,12 @@ export declare class Renderer {
      * @param color
      */
     vertices(positions: Vector[], color: Color): void;
+    vertices(v: Vector[]): void;
     vertices(vertices: Vertex[]): void;
+    /**
+     * Splits the current path. Call this before using any drawing methods to start a new path without clearing the current one.
+     */
+    splitPath(): void;
     /**
      * Draws an arc (to the current path). For a circle, set `startAngle` to `0` and `endAngle` to `Math.PI * 2`
      * @param pos The center of the arc
@@ -119,17 +133,24 @@ export declare class Renderer {
      * @param width The stroke width
      * @param options Options for the stroke
      */
-    strokePath(width: number, { closed, dashed, dashLength }?: StrokePathOptions): void;
+    stroke(width: number, { closed, dashed, dashLength }?: StrokeOptions): void;
     /**
      * Fills everything in the current path since the last `beginPath()` call with the specified color.
      */
-    fillPath(): void;
+    fill(): void;
+    private fillPath;
     /**
      * Sets the font of the text renderer
      * @param font The font to set
      * @example renderer.setFont("30px Arial");
      */
     setFont(font: string): void;
+    /**
+     * Sets the text align of the text renderer
+     * @param align The text align to set
+     * @example renderer.setTextAlign("center");
+     */
+    setTextAlign(align: CanvasTextAlign): void;
     /**
      *
      * @param text The text to render

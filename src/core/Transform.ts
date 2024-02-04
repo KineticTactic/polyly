@@ -20,16 +20,31 @@ export class Transform {
     }
 
     public translate(translation: Vector) {
+        this.translation.add(translation);
+        this.transformed = true;
+    }
+
+    public setTranslation(translation: Vector) {
         this.translation = translation;
         this.transformed = true;
     }
 
-    public rotate(rotation: number) {
-        this.rotation = rotation;
+    public rotate(angle: number) {
+        this.rotation += angle;
+        this.transformed = true;
+    }
+
+    public setRotation(angle: number) {
+        this.rotation = angle;
         this.transformed = true;
     }
 
     public scale(scale: Vector) {
+        this.scaling.mult(scale);
+        this.transformed = true;
+    }
+
+    public setScale(scale: Vector) {
         this.scaling = scale;
         this.transformed = true;
     }

@@ -19,12 +19,12 @@ renderer.vertex(new Polyly.Vector(-400, -100), new Polyly.Color(255, 25, 0, 255)
 renderer.vertex(new Polyly.Vector(-200, -100), new Polyly.Color(0, 255, 0, 255));
 renderer.vertex(new Polyly.Vector(-200, 100), new Polyly.Color(0, 0, 255, 255));
 renderer.vertex(new Polyly.Vector(-400, 100), new Polyly.Color(255, 0, 255, 255));
-renderer.fillPath();
+renderer.fill();
 renderer.transform.resetTransforms();
-renderer.strokePath(20, { closed: true });
+renderer.stroke(20, { closed: true });
 renderer.transform.translate(new Polyly.Vector(500, 200));
 renderer.transform.scale(new Polyly.Vector(1.5, 1));
-renderer.strokePath(10, { closed: true, dashed: true, dashLength: 15 });
+renderer.stroke(10, { closed: true, dashed: true, dashLength: 15 });
 renderer.transform.resetTransforms();
 
 const buffer = new Polyly.StaticBuffer(renderer.gl);
@@ -35,7 +35,7 @@ renderer.beginPath();
 renderer.arc(new Polyly.Vector(0, 0), 400, 0, (Math.PI * 6) / 4, new Polyly.Color(255, 0, 0, 160));
 renderer.vertex(new Polyly.Vector(0, 0), new Polyly.Color(255, 0, 255, 255));
 renderer.arc(new Polyly.Vector(200, 0), 100, 0, (Math.PI * 6) / 4, new Polyly.Color(255, 150, 0, 160));
-renderer.strokePath(5, { closed: true });
+renderer.stroke(5, { closed: true });
 
 buffer.update();
 
@@ -47,11 +47,11 @@ renderer.setBuffer(0);
 
 renderer.beginPath();
 renderer.arc(new Polyly.Vector(200, -200), 200, 0, Math.PI * 2, new Polyly.Color(0, 255, 255, 255), 0.5);
-renderer.strokePath(5, { closed: true });
+renderer.stroke(5, { closed: true });
 
 renderer.beginPath();
 renderer.rect(new Polyly.Vector(0, 0), new Polyly.Vector(100, 100), new Polyly.Color(255, 0, 0, 255));
-renderer.fillPath();
+renderer.fill();
 
 renderer.renderText("Hellooo World!", new Polyly.Vector(100, 100), Polyly.Color.WHITE);
 renderer.setFont("30px Arial");

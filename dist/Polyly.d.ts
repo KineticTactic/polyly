@@ -12,5 +12,5 @@ export { Transform } from "./core/Transform.ts";
 export type { RendererOptions } from "./core/Renderer.ts";
 export type { DynamicBufferOptions } from "./buffers/DynamicBuffer.ts";
 export type { BufferDataOptions } from "./buffers/BufferData.ts";
-export type { StrokePathOptions } from "./core/Renderer.ts";
+export type { StrokeOptions as StrokePathOptions } from "./core/Renderer.ts";
 export type { CanvasTextRendererOptions } from "./core/CanvasTextRenderer.ts";

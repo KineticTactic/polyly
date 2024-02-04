@@ -34,6 +34,10 @@ export class CanvasTextRenderer {
         this.textBuffer.push({ text, pos, color, font: this.ctx.font });
     }
 
+    public setTextAlign(align: CanvasTextAlign) {
+        this.ctx.textAlign = align;
+    }
+
     public render(camera: Camera) {
         for (let text of this.textBuffer) {
             this.ctx.font = text.font;

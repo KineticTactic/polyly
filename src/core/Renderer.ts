@@ -29,7 +29,7 @@ export interface RendererOptions {
  * Options for passing to the strokePath function
  * @category Core
  */
-export interface StrokePathOptions {
+export interface StrokeOptions {
     /** Whether to close the path (join the first and last vertex) */
     closed?: boolean;
     /** Whether to render the path as a dashed line */
@@ -53,11 +53,13 @@ export class Renderer {
     public camera: Camera;
     /** The text renderer */
     public textRenderer: CanvasTextRenderer | null;
+    /** The default vertex color */
+    public vertexColor: Color = new Color(255, 255, 255, 255);
 
     private shaderProgramInfo: twgl.ProgramInfo;
     private buffers: Buffer[] = [];
     private currentBufferIndex: number = 0;
-    private currentPath: Vertex[] = [];
+    private currentPath: (Vertex | null)[] = [];
 
     /**
      * @param options Options for the renderer
@@ -175,11 +177,16 @@ export class Renderer {
         );
     }
 
-    private path(vertices: Vertex[], width: number, closed = false) {
+    private buildPath(vertices: Vertex[], width: number, closed = false) {
         const outputVertices: Vertex[] = [];
         const indexData = [];
         const v1 = vertices[0];
         const v2 = vertices[1];
+
+        // If there are only two vertices, the path cannot closed
+        if (vertices.length === 2) closed = false;
+
+        // Beginning two sets of vertices
         if (!closed) {
             outputVertices.push(...calculateSidewaysVertices(v1, v2, width));
         } else {
@@ -187,10 +194,12 @@ export class Renderer {
         }
 
         for (let i = 0; i < vertices.length - (closed ? 1 : 2); i++) {
+            // I'll be honest i just messed around with the indices till it looked right
             indexData.push(0 + i * 2, 1 + i * 2, 2 + i * 2, 1 + i * 2, 2 + i * 2, 3 + i * 2);
             outputVertices.push(...calculateVertexPoints(vertices[i], vertices[i + 1], vertices[(i + 2) % vertices.length], width));
         }
 
+        // End two sets of vertices
         if (!closed) {
             const i = outputVertices.length - 2;
             indexData.push(i + 0, i + 1, i + 2, i + 0, i + 2, i + 3);
@@ -201,6 +210,45 @@ export class Renderer {
         }
 
         this.buffers[this.currentBufferIndex].addVerticesAndIndices(this.transform.transformVertices(outputVertices), indexData);
+    }
+
+    private buildDashedPath(vertices: Vertex[], width: number, closed = false, dashLength = 10) {
+        let lastVertexOfLastEdge: null | Vertex = null;
+
+        const endIndex = closed ? vertices.length + 1 : vertices.length;
+        for (let i = 0; i < endIndex; i++) {
+            const v1 = vertices[i % vertices.length];
+            const v2 = vertices[(i + 1) % vertices.length];
+            const length = v1.pos.dist(v2.pos);
+            const numSegments = Math.floor(length / dashLength);
+            const segmentLength = length / numSegments;
+
+            let lastVertex = vertices[i];
+
+            const dir = v2.pos.copy().sub(v1.pos);
+            for (let j = 1; j < numSegments; j++) {
+                const newVertexPos = v1.pos.copy().add(dir.copy().setMag(segmentLength * j));
+                let newVertex = new Vertex(newVertexPos, Color.interpolate(v1.color, v2.color, j / numSegments));
+
+                if (j === 1 && lastVertexOfLastEdge) {
+                    this.buildPath([lastVertexOfLastEdge, v1, newVertex], width);
+                    if (i === endIndex - 1) break;
+                }
+
+                if (j % 2 === 0) this.buildPath([lastVertex, newVertex], width);
+                lastVertex = newVertex;
+            }
+
+            lastVertexOfLastEdge = lastVertex;
+        }
+    }
+
+    /**
+     * Sets the default vertex color
+     * @param color The color to set
+     */
+    public setVertexColor(color: Color) {
+        this.vertexColor = color;
     }
 
     /**
@@ -215,6 +263,7 @@ export class Renderer {
      * @param pos
      * @param color
      */
+    public vertex(pos: Vector): void;
     public vertex(pos: Vector, color: Color): void;
     public vertex(vertex: Vertex): void;
 
@@ -223,6 +272,8 @@ export class Renderer {
             this.currentPath.push(v);
         } else if (color) {
             this.currentPath.push(new Vertex(v, color));
+        } else {
+            this.currentPath.push(new Vertex(v, this.vertexColor));
         }
     }
 
@@ -232,6 +283,7 @@ export class Renderer {
      * @param color
      */
     public vertices(positions: Vector[], color: Color): void;
+    public vertices(v: Vector[]): void;
     public vertices(vertices: Vertex[]): void;
 
     public vertices(v: Vector[] | Vertex[], color?: Color) {
@@ -239,7 +291,16 @@ export class Renderer {
             this.currentPath = [...this.currentPath, ...(v as Vertex[])];
         } else if (color) {
             this.currentPath = [...this.currentPath, ...(v as Vector[]).map((pos) => new Vertex(pos, color))];
+        } else {
+            this.currentPath = [...this.currentPath, ...(v as Vector[]).map((pos) => new Vertex(pos, this.vertexColor))];
         }
+    }
+
+    /**
+     * Splits the current path. Call this before using any drawing methods to start a new path without clearing the current one.
+     */
+    public splitPath() {
+        this.currentPath.push(null);
     }
 
     /**
@@ -278,52 +339,68 @@ export class Renderer {
      * @param width The stroke width
      * @param options Options for the stroke
      */
-    public strokePath(width: number, { closed = false, dashed = false, dashLength = 10 }: StrokePathOptions = {}): void {
-        if (!dashed) {
-            ///TODO: REneame to build path or something
-            this.path(this.currentPath, width, closed);
+    public stroke(width: number, { closed = false, dashed = false, dashLength = 10 }: StrokeOptions = {}): void {
+        let nullIndex = this.currentPath.findIndex((v) => v === null);
+
+        if (nullIndex === -1) {
+            // There are no breaks in the path
+            if (!dashed) this.buildPath(this.currentPath as Vertex[], width, closed);
+            else this.buildDashedPath(this.currentPath as Vertex[], width, closed, dashLength);
             return;
         }
 
-        let lastVertexOfLastEdge: null | Vertex = null;
+        while (nullIndex !== -1) {
+            if (!dashed) this.buildPath(this.currentPath.slice(0, nullIndex) as Vertex[], width, closed);
+            else this.buildDashedPath(this.currentPath.slice(0, nullIndex) as Vertex[], width, closed, dashLength);
 
-        const endIndex = closed ? this.currentPath.length + 1 : this.currentPath.length;
-        for (let i = 0; i < endIndex; i++) {
-            const v1 = this.currentPath[i % this.currentPath.length];
-            const v2 = this.currentPath[(i + 1) % this.currentPath.length];
-            const length = v1.pos.dist(v2.pos);
-            const numSegments = Math.floor(length / dashLength);
-            const segmentLength = length / numSegments;
+            this.currentPath = this.currentPath.slice(nullIndex + 1);
 
-            let lastVertex = this.currentPath[i];
+            // If the path is empty, return
+            if (this.currentPath.length === 0) return;
 
-            const dir = v2.pos.copy().sub(v1.pos);
-            for (let j = 1; j < numSegments; j++) {
-                const newVertexPos = v1.pos.copy().add(dir.copy().setMag(segmentLength * j));
-                let newVertex = new Vertex(newVertexPos, Color.interpolate(v1.color, v2.color, j / numSegments));
-
-                if (j === 1 && lastVertexOfLastEdge) {
-                    this.path([lastVertexOfLastEdge, v1, newVertex], width);
-                    if (i === endIndex - 1) break;
-                }
-
-                if (j % 2 === 0) this.path([lastVertex, newVertex], width);
-                lastVertex = newVertex;
-            }
-
-            lastVertexOfLastEdge = lastVertex;
+            // Find the next break in the path
+            nullIndex = this.currentPath.findIndex((v) => v === null);
+            // If there are no more breaks in the path, draw the rest of the path
+            nullIndex = nullIndex === -1 ? this.currentPath.length : nullIndex;
         }
     }
 
     /**
      * Fills everything in the current path since the last `beginPath()` call with the specified color.
      */
-    public fillPath() {
+    public fill() {
+        let nullIndex = this.currentPath.findIndex((v) => v === null);
+
+        this.currentPath = this.currentPath.slice(nullIndex + 1);
+        nullIndex = this.currentPath.findIndex((v) => v === null);
+
+        if (nullIndex === -1) {
+            this.fillPath(this.currentPath as Vertex[]);
+            return;
+        }
+
+        while (nullIndex !== -1) {
+            this.fillPath(this.currentPath.slice(0, nullIndex) as Vertex[]);
+
+            this.currentPath = this.currentPath.slice(nullIndex + 1);
+
+            // If the path is empty, return
+            if (this.currentPath.length === 0) return;
+
+            // Find the next break in the path
+            nullIndex = this.currentPath.findIndex((v) => v === null);
+            // If there are no more breaks in the path, draw the rest of the path
+            nullIndex = nullIndex === -1 ? this.currentPath.length : nullIndex;
+        }
+    }
+
+    private fillPath(vertices: Vertex[]) {
         const indicesList = [];
-        for (let i = 1; i < this.currentPath.length - 1; i++) {
+
+        for (let i = 1; i < vertices.length - 1; i++) {
             indicesList.push(0, i, i + 1);
         }
-        this.buffers[this.currentBufferIndex].addVerticesAndIndices(this.transform.transformVertices(this.currentPath), indicesList);
+        this.buffers[this.currentBufferIndex].addVerticesAndIndices(this.transform.transformVertices(vertices), indicesList);
     }
 
     /**
@@ -334,6 +411,16 @@ export class Renderer {
     public setFont(font: string) {
         if (!this.textRenderer) throw new Error("Text renderer not initialized!");
         this.textRenderer.setFont(font);
+    }
+
+    /**
+     * Sets the text align of the text renderer
+     * @param align The text align to set
+     * @example renderer.setTextAlign("center");
+     */
+    public setTextAlign(align: CanvasTextAlign) {
+        if (!this.textRenderer) throw new Error("Text renderer not initialized!");
+        this.textRenderer.setTextAlign(align);
     }
 
     /**

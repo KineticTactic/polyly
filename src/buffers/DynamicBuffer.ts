@@ -26,7 +26,9 @@ export class DynamicBuffer extends Buffer {
 
     constructor(gl: WebGL2RenderingContext | WebGLRenderingContext, options: DynamicBufferOptions) {
         super(gl);
-        this.bufferSize = options.bufferSize | 10000;
+        this.bufferSize = options.bufferSize;
+        console.log(this.bufferSize);
+
         this.addBuffer();
     }
 
