@@ -207,27 +207,18 @@ export class Renderer {
         }
 
         for (let i = 0; i < vertices.length - (closed ? 1 : 2); i++) {
-            // I'll be honest i just messed around with the indices till it looked right
-            // indexData.push(0 + i * 2, 1 + i * 2, 2 + i * 2, 1 + i * 2, 2 + i * 2, 3 + i * 2);
             const vertexData = calculateVertexPoints(vertices[i], vertices[i + 1], vertices[(i + 2) % vertices.length], width, miterLimit);
-            // if (vertexData.vertices.length === 3) {
-            //     console.log("three!!");
-            //     indexData.push(...[0, 1, 2, 1, 2, 3, 2, 3, 4].map((v) => v + outputVertices.length - 2));
-            // } else {
-            //     console.log("YES");
-            //     indexData.push(...[0, 1, 2, 1, 2, 3].map((v) => v + outputVertices.length - 2));
-            // }
-            // console.log(indexData);
+
             // DebugRenderer.debugPoint(outputVertices[outputVertices.length - 1].pos);
             // DebugRenderer.debugPoint(outputVertices[outputVertices.length - 2].pos, "green");
 
             indexData.push(...vertexData.indices.map((v) => v + outputVertices.length - 2));
             outputVertices.push(...vertexData.vertices);
-            // console.log(outputVertices.length);
         }
 
         // DebugRenderer.debugPoint(outputVertices[outputVertices.length - 1].pos);
         // DebugRenderer.debugPoint(outputVertices[outputVertices.length - 2].pos, "green");
+
         // End two sets of vertices
         if (!closed) {
             indexData.push(...[0, 1, 2, 1, 2, 3].map((v) => v + outputVertices.length - 2));
@@ -241,7 +232,6 @@ export class Renderer {
                     console.log("YES");
                 }
             } else indexData.push(i, i + 1, 1, i, 0, 1);
-            // indexData.push([0, 1, 2, 1, 2, 3].map((v) => v + outputVertices.length - 2));
         }
 
         this.buffers[this.currentBufferIndex].addVerticesAndIndices(this.transform.transformVertices(outputVertices), indexData);

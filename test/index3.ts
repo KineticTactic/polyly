@@ -2,7 +2,11 @@ import "./style.css";
 
 import * as Polyly from "../src/Polyly";
 
-const renderer = new Polyly.Renderer({ webglVersion: 2, initTextRenderer: true });
+const renderer = new Polyly.Renderer({
+    webglVersion: 2,
+    initTextRenderer: true,
+    enableDebugRenderer: true,
+});
 
 renderer.clear();
 
@@ -75,17 +79,22 @@ function draw() {
     renderer.clear();
 
     renderer.beginPath();
+    renderer.setColor(Polyly.RGBA(255, 255, 255, 50));
+    // renderer.rect(Polyly.Vec(-400, -200), Polyly.Vec(800, 400));
+    // renderer.fill();
+
+    renderer.beginPath();
     renderer.resetTransforms();
     // renderer.translate(Polyly.Vec(-200, 0));
     renderer.scale(1);
     renderer.setColor(Polyly.RGBA(255, 0, 255, 150));
     renderer.vertex(Polyly.Vec(0, 0));
-    renderer.vertex(Polyly.Vec(100, 100), Polyly.RGBA(0, 255, 0, 150));
-    renderer.vertex(Polyly.Vec(200, 200), Polyly.RGBA(0, 0, 255, 150));
-    renderer.vertex(Polyly.Vec(200, 100), Polyly.RGBA(255, 0, 0, 150));
-    renderer.vertex(Polyly.Vec(250, 0), Polyly.RGBA(255, 255, 0, 150));
+    renderer.vertex(Polyly.Vec(100, 100));
+    renderer.vertex(Polyly.Vec(200, 200));
+    renderer.vertex(Polyly.Vec(200, 100));
+    renderer.vertex(Polyly.Vec(250, 0));
     renderer.vertex(Polyly.Vec(-150, -100));
-    renderer.vertex(renderer.camera.screenSpaceToWorldSpace(Polyly.Vec(mouseX, mouseY)), Polyly.RGBA(255, 255, 255, 150));
+    renderer.vertex(renderer.camera.screenSpaceToWorldSpace(Polyly.Vec(mouseX, mouseY)));
     // renderer.vertex(Polyly.Vec(100, 110));
     // renderer.vertex(Polyly.Vec(150, 20));
     // renderer.splitPath();
