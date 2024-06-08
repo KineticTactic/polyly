@@ -10,6 +10,7 @@ export declare class DebugRenderer {
     static canvas: HTMLCanvasElement;
     static ctx: CanvasRenderingContext2D;
     static camera: Camera;
+    static enabled: boolean;
     static init(options: DebugRendererOptions): void;
     static clear(): void;
     static debugLine(line: Line, color?: string): void;

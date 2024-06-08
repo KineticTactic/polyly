@@ -1,6 +1,6 @@
 import { Vector } from "./Vector";
 import { Vertex } from "../core/Vertex";
-import { DebugRenderer } from "./DebugRenderer";
+// import { DebugRenderer } from "./DebugRenderer";
 
 export function interpolate(x: number, x1: number, x2: number, y1: number, y2: number): number {
     return y1 + (x - x1) * ((y2 - y1) / (x2 - x1));
@@ -108,10 +108,6 @@ export function calculateVertexPoints(v1: Vertex, v2: Vertex, v3: Vertex, w: num
         if (p2q2Dist > p2p1Dist || p2q2Dist > p2p3Dist) {
             const l7 = p2p3Dist > p2p1Dist ? getPerpendicularLineEquation(l1, p1) : getPerpendicularLineEquation(l2, p3);
             const s = solveLineEquations(l7, p2p3Dist > p2p1Dist ? l6 : l4);
-            DebugRenderer.debugPoint(s, "cyan");
-
-            DebugRenderer.debugLine(l6, "cyan");
-            DebugRenderer.debugLine(l7, "cyan");
             q2 = s;
         }
 
@@ -130,10 +126,6 @@ export function calculateVertexPoints(v1: Vertex, v2: Vertex, v3: Vertex, w: num
         if (p2q1Dist > p2p1Dist || p2q1Dist > p2p3Dist) {
             const l7 = p2p3Dist > p2p1Dist ? getPerpendicularLineEquation(l1, p1) : getPerpendicularLineEquation(l2, p3);
             const s = solveLineEquations(l7, p2p3Dist > p2p1Dist ? l5 : l3);
-            DebugRenderer.debugPoint(s, "cyan");
-
-            DebugRenderer.debugLine(p2p3Dist > p2p1Dist ? l5 : l3, "pink");
-            DebugRenderer.debugLine(l7, "cyan");
             q1 = s;
         }
 

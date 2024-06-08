@@ -12,18 +12,22 @@ export class DebugRenderer {
     static canvas: HTMLCanvasElement;
     static ctx: CanvasRenderingContext2D;
     static camera: Camera;
+    static enabled: boolean = false;
 
     static init(options: DebugRendererOptions) {
         this.canvas = options.canvas;
         this.ctx = this.canvas.getContext("2d")!;
         this.camera = options.camera;
+        this.enabled = true;
     }
 
     public static clear() {
+        if (!this.enabled) return;
         this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
     }
 
     public static debugLine(line: Line, color: string = "red") {
+        if (!this.enabled) return;
         // Line has {a, b, c} coefficients
         // ax + by + c = 0
         // y = (-c - ax) / b
@@ -43,6 +47,8 @@ export class DebugRenderer {
     }
 
     public static debugPoint(pos: Vector, color: string = "red") {
+        if (!this.enabled) return;
+
         this.ctx.fillStyle = color;
         const screenPos = this.camera.worldSpaceToScreenSpace(pos);
         this.ctx.beginPath();
