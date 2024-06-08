@@ -1,4 +1,4 @@
-export function V(x: number, y: number) {
+export function Vec(x: number, y: number) {
     return new Vector(x, y);
 }
 

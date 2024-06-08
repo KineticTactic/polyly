@@ -18,6 +18,8 @@ export interface RendererOptions {
     initTextRenderer?: boolean;
     /** The camera to render with. If not specified, the renderer will render with a default camera. */
     camera?: Camera;
+    /** Enable the debug renderer */
+    enableDebugRenderer?: boolean;
 }
 /**
  * Options for passing to the strokePath function
@@ -30,6 +32,8 @@ export interface StrokeOptions {
     dashed?: boolean;
     /** The length of each dash (only has effect if `dashed` is set to true) */
     dashLength?: number;
+    /** The miter limit angle below which the line join becomes bevelled */
+    miterLimit?: number;
 }
 /**
  * The main Renderer class with all the rendering function
@@ -72,21 +76,13 @@ export declare class Renderer {
      * @param color The clear color
      */
     clear(color?: Color): void;
-    /**
-     * Draws a line. *Note:* This method does not need there to be a current active path.
-     * @param startPos Starting position of the line
-     * @param endPos Ending position of the line
-     * @param width Width of the line
-     * @param color Color of the line
-     */
-    line(startPos: Vector, endPos: Vector, width: number, color: Color): void;
     private buildPath;
     private buildDashedPath;
     /**
      * Sets the default vertex color
      * @param color The color to set
      */
-    setVertexColor(color: Color): void;
+    setColor(color: Color): void;
     /**
      * Starts a new path by clearing everything in the current path. Call this before using any drawing methods.
      */
@@ -105,35 +101,49 @@ export declare class Renderer {
      * @param color
      */
     vertices(positions: Vector[], color: Color): void;
+    /**
+     * Draws vertices (to the current path).
+     * @param vectors The list of position vectors to draw
+     */
     vertices(v: Vector[]): void;
+    /**
+     * Draws vertices (to the current path).
+     * @param vertices The list of vertices to draw
+     */
     vertices(vertices: Vertex[]): void;
     /**
      * Splits the current path. Call this before using any drawing methods to start a new path without clearing the current one.
      */
     splitPath(): void;
     /**
+     * Draws a line.
+     * @param startPos Starting position of the line
+     * @param endPos Ending position of the line
+     * @param width Width of the line
+     */
+    line(startPos: Vector, endPos: Vector): void;
+    /**
      * Draws an arc (to the current path). For a circle, set `startAngle` to `0` and `endAngle` to `Math.PI * 2`
      * @param pos The center of the arc
      * @param radius The radius of the arc
      * @param startAngle The starting angle of the arc
      * @param endAngle The ending angle of the arc
-     * @param color The color of the arc
      * @param detail The detail of the arc. Higher values = smoother arc. Defaults to `1`
      */
-    arc(pos: Vector, radius: number, startAngle: number, endAngle: number, color: Color, detail?: number): void;
+    arc(pos: Vector, radius: number, startAngle: number, endAngle: number, detail?: number): void;
     /**
      * Draws a rectangle (to the current path).
+     * Note that it does not close the path. So if you want to stroke() it, use the `closed` option in the `stroke()` method.
      * @param pos The position of the top left corner of the rectangle
      * @param size The size (width and height) of the rectangle
-     * @param color The color of the rectangle
      */
-    rect(pos: Vector, size: Vector, color: Color): void;
+    rect(pos: Vector, size: Vector): void;
     /**
      * Strokes (outlines) everything in the current path since the last `beginPath()` call with the specified width and options.
      * @param width The stroke width
      * @param options Options for the stroke
      */
-    stroke(width: number, { closed, dashed, dashLength }?: StrokeOptions): void;
+    stroke(width: number, { closed, dashed, dashLength, miterLimit }?: StrokeOptions): void;
     /**
      * Fills everything in the current path since the last `beginPath()` call with the specified color.
      */
@@ -163,6 +173,42 @@ export declare class Renderer {
      * @param camera The camera to render with
      */
     render(): void;
+    /**
+     * Translates the camera by the specified vector
+     * @param pos The vector to translate the camera by
+     */
+    translate(pos: Vector): void;
+    /**
+     * Translates the camera by the specified x and y values
+     * @param x The x value to translate the camera by
+     * @param y The y value to translate the camera by
+     */
+    translate(x: number, y: number): void;
+    /**
+     * Rotates the camera by the specified angle
+     * @param angle The angle to rotate the camera by
+     */
+    rotate(angle: number): void;
+    /**
+     * Scales up by the specified vector
+     * @param scale The vector to scale the camera by
+     */
+    scale(scale: Vector): void;
+    /**
+     * Scales up by the specified x and y values
+     * @param x The x value to scale the camera by
+     * @param y The y value to scale the camera by
+     */
+    scale(x: number, y: number): void;
+    /**
+     * Scales uniformly by the specified value
+     * @param n The value to scale the camera by
+     */
+    scale(n: number): void;
+    /**
+     * Resets all transforms
+     */
+    resetTransforms(): void;
     /**
      * Returns the size of the canvas
      */

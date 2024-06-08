@@ -9,6 +9,7 @@ import { Color } from "../util/Color";
 import { calculateSidewaysVertices, calculateVertexPoints } from "../util/math";
 import { Transform } from "./Transform";
 import { CanvasTextRenderer } from "./CanvasTextRenderer";
+import { DebugRenderer } from "../util/DebugRenderer";
 
 /**
  * Options for passing to the Renderer constructor
@@ -23,6 +24,8 @@ export interface RendererOptions {
     initTextRenderer?: boolean;
     /** The camera to render with. If not specified, the renderer will render with a default camera. */
     camera?: Camera;
+    /** Enable the debug renderer */
+    enableDebugRenderer?: boolean;
 }
 
 /**
@@ -36,6 +39,8 @@ export interface StrokeOptions {
     dashed?: boolean;
     /** The length of each dash (only has effect if `dashed` is set to true) */
     dashLength?: number;
+    /** The miter limit angle below which the line join becomes bevelled */
+    miterLimit?: number;
 }
 
 /**
@@ -120,6 +125,18 @@ export class Renderer {
         this.setBuffer(new DynamicBuffer(this.gl, { bufferSize: 1000 }));
 
         this.transform = new Transform();
+
+        // Debugger
+        if (options.enableDebugRenderer) {
+            const debugCanvas = document.createElement("canvas");
+            debugCanvas.width = window.innerWidth;
+            debugCanvas.height = window.innerHeight;
+            this.canvas.parentElement!.appendChild(debugCanvas);
+            debugCanvas.style.position = "absolute";
+            debugCanvas.style.top = "0";
+            debugCanvas.style.left = "0";
+            DebugRenderer.init({ canvas: debugCanvas, camera: this.camera });
+        }
     }
 
     /**
@@ -159,25 +176,12 @@ export class Renderer {
         this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
 
         if (this.textRenderer) this.textRenderer.clear();
+
+        // Clear Debug canvas
+        DebugRenderer.clear();
     }
 
-    /**
-     * Draws a line. *Note:* This method does not need there to be a current active path.
-     * @param startPos Starting position of the line
-     * @param endPos Ending position of the line
-     * @param width Width of the line
-     * @param color Color of the line
-     */
-    public line(startPos: Vector, endPos: Vector, width: number, color: Color): void {
-        const vertex1 = new Vertex(startPos, color);
-        const vertex2 = new Vertex(endPos, color);
-        this.buffers[this.currentBufferIndex].addVerticesAndIndices(
-            this.transform.transformVertices([...calculateSidewaysVertices(vertex1, vertex2, width), ...calculateSidewaysVertices(vertex2, vertex1, width)]),
-            [0, 1, 2, 0, 2, 3]
-        );
-    }
-
-    private buildPath(vertices: Vertex[], width: number, closed = false) {
+    private buildPath(vertices: Vertex[], width: number, closed = false, miterLimit: number) {
         const outputVertices: Vertex[] = [];
         const indexData = [];
         const v1 = vertices[0];
@@ -186,33 +190,64 @@ export class Renderer {
         // If there are only two vertices, the path cannot closed
         if (vertices.length === 2) closed = false;
 
+        let bevelledStart = false;
+        let bevelledRight = false;
         // Beginning two sets of vertices
         if (!closed) {
             outputVertices.push(...calculateSidewaysVertices(v1, v2, width));
         } else {
-            outputVertices.push(...calculateVertexPoints(vertices[vertices.length - 1], v1, v2, width));
+            const vertexData = calculateVertexPoints(vertices[vertices.length - 1], v1, v2, width, miterLimit);
+            outputVertices.push(...vertexData.vertices);
+            if (outputVertices.length === 3) {
+                indexData.push(0, 1, 2);
+                bevelledStart = true;
+                bevelledRight = vertexData.right as boolean;
+            }
+            console.log(outputVertices.length);
         }
 
         for (let i = 0; i < vertices.length - (closed ? 1 : 2); i++) {
             // I'll be honest i just messed around with the indices till it looked right
-            indexData.push(0 + i * 2, 1 + i * 2, 2 + i * 2, 1 + i * 2, 2 + i * 2, 3 + i * 2);
-            outputVertices.push(...calculateVertexPoints(vertices[i], vertices[i + 1], vertices[(i + 2) % vertices.length], width));
+            // indexData.push(0 + i * 2, 1 + i * 2, 2 + i * 2, 1 + i * 2, 2 + i * 2, 3 + i * 2);
+            const vertexData = calculateVertexPoints(vertices[i], vertices[i + 1], vertices[(i + 2) % vertices.length], width, miterLimit);
+            // if (vertexData.vertices.length === 3) {
+            //     console.log("three!!");
+            //     indexData.push(...[0, 1, 2, 1, 2, 3, 2, 3, 4].map((v) => v + outputVertices.length - 2));
+            // } else {
+            //     console.log("YES");
+            //     indexData.push(...[0, 1, 2, 1, 2, 3].map((v) => v + outputVertices.length - 2));
+            // }
+            // console.log(indexData);
+            // DebugRenderer.debugPoint(outputVertices[outputVertices.length - 1].pos);
+            // DebugRenderer.debugPoint(outputVertices[outputVertices.length - 2].pos, "green");
+
+            indexData.push(...vertexData.indices.map((v) => v + outputVertices.length - 2));
+            outputVertices.push(...vertexData.vertices);
+            // console.log(outputVertices.length);
         }
 
+        // DebugRenderer.debugPoint(outputVertices[outputVertices.length - 1].pos);
+        // DebugRenderer.debugPoint(outputVertices[outputVertices.length - 2].pos, "green");
         // End two sets of vertices
         if (!closed) {
-            const i = outputVertices.length - 2;
-            indexData.push(i + 0, i + 1, i + 2, i + 0, i + 2, i + 3);
-            outputVertices.push(...calculateSidewaysVertices(vertices[vertices.length - 1], vertices[vertices.length - 2], width));
+            indexData.push(...[0, 1, 2, 1, 2, 3].map((v) => v + outputVertices.length - 2));
+            outputVertices.push(...calculateSidewaysVertices(vertices[vertices.length - 1], vertices[vertices.length - 2], width).reverse());
         } else {
             const i = outputVertices.length - 2;
-            indexData.push(i, i + 1, 0, i + 1, 0, 1);
+            if (bevelledStart) {
+                if (!bevelledRight) indexData.push(i, i + 1, 0, i, 0, 1);
+                else {
+                    indexData.push(i, i + 1, 2, i, 0, 2);
+                    console.log("YES");
+                }
+            } else indexData.push(i, i + 1, 1, i, 0, 1);
+            // indexData.push([0, 1, 2, 1, 2, 3].map((v) => v + outputVertices.length - 2));
         }
 
         this.buffers[this.currentBufferIndex].addVerticesAndIndices(this.transform.transformVertices(outputVertices), indexData);
     }
 
-    private buildDashedPath(vertices: Vertex[], width: number, closed = false, dashLength = 10) {
+    private buildDashedPath(vertices: Vertex[], width: number, closed = false, dashLength = 10, miterLimit: number) {
         let lastVertexOfLastEdge: null | Vertex = null;
 
         const endIndex = closed ? vertices.length + 1 : vertices.length;
@@ -231,11 +266,11 @@ export class Renderer {
                 let newVertex = new Vertex(newVertexPos, Color.interpolate(v1.color, v2.color, j / numSegments));
 
                 if (j === 1 && lastVertexOfLastEdge) {
-                    this.buildPath([lastVertexOfLastEdge, v1, newVertex], width);
+                    this.buildPath([lastVertexOfLastEdge, v1, newVertex], width, closed, miterLimit);
                     if (i === endIndex - 1) break;
                 }
 
-                if (j % 2 === 0) this.buildPath([lastVertex, newVertex], width);
+                if (j % 2 === 0) this.buildPath([lastVertex, newVertex], width, closed, miterLimit);
                 lastVertex = newVertex;
             }
 
@@ -247,7 +282,7 @@ export class Renderer {
      * Sets the default vertex color
      * @param color The color to set
      */
-    public setVertexColor(color: Color) {
+    public setColor(color: Color) {
         this.vertexColor = color;
     }
 
@@ -283,7 +318,15 @@ export class Renderer {
      * @param color
      */
     public vertices(positions: Vector[], color: Color): void;
+    /**
+     * Draws vertices (to the current path).
+     * @param vectors The list of position vectors to draw
+     */
     public vertices(v: Vector[]): void;
+    /**
+     * Draws vertices (to the current path).
+     * @param vertices The list of vertices to draw
+     */
     public vertices(vertices: Vertex[]): void;
 
     public vertices(v: Vector[] | Vertex[], color?: Color) {
@@ -304,34 +347,52 @@ export class Renderer {
     }
 
     /**
+     * Draws a line.
+     * @param startPos Starting position of the line
+     * @param endPos Ending position of the line
+     * @param width Width of the line
+     */
+    public line(startPos: Vector, endPos: Vector): void {
+        const vertex1 = new Vertex(startPos, this.vertexColor);
+        const vertex2 = new Vertex(endPos, this.vertexColor);
+        this.currentPath.push(vertex1, vertex2, null);
+    }
+
+    /**
      * Draws an arc (to the current path). For a circle, set `startAngle` to `0` and `endAngle` to `Math.PI * 2`
      * @param pos The center of the arc
      * @param radius The radius of the arc
      * @param startAngle The starting angle of the arc
      * @param endAngle The ending angle of the arc
-     * @param color The color of the arc
      * @param detail The detail of the arc. Higher values = smoother arc. Defaults to `1`
      */
-    public arc(pos: Vector, radius: number, startAngle: number, endAngle: number, color: Color, detail = 1) {
-        const numSegments = (Math.PI * 2 * radius * detail) / 20;
+    public arc(pos: Vector, radius: number, startAngle: number, endAngle: number, detail: number = 1) {
+        const numSegments = 30 * detail;
+
         const angleStep = (endAngle - startAngle) / numSegments;
         const vertices = [];
+        let angle = 0;
         for (let i = 0; i <= numSegments; i++) {
-            const angle = startAngle + angleStep * i;
-            vertices.push(new Vertex(new Vector(pos.x + radius * Math.cos(angle), pos.y + radius * Math.sin(angle)), color));
+            angle = startAngle + angleStep * i;
+            vertices.push(new Vertex(new Vector(pos.x + radius * Math.cos(angle), pos.y + radius * Math.sin(angle)), this.vertexColor));
         }
+
+        // Sometimes in lower details, it doesn't reach the end angle and leaves a gap.
+        if (endAngle - angle > 0.01)
+            vertices.push(new Vertex(new Vector(pos.x + radius * Math.cos(endAngle), pos.y + radius * Math.sin(endAngle)), this.vertexColor));
+
         this.currentPath.push(...vertices);
     }
 
     /**
      * Draws a rectangle (to the current path).
+     * Note that it does not close the path. So if you want to stroke() it, use the `closed` option in the `stroke()` method.
      * @param pos The position of the top left corner of the rectangle
      * @param size The size (width and height) of the rectangle
-     * @param color The color of the rectangle
      */
-    public rect(pos: Vector, size: Vector, color: Color) {
+    public rect(pos: Vector, size: Vector) {
         const positions = [pos, new Vector(pos.x + size.x, pos.y), new Vector(pos.x + size.y, pos.y + size.y), new Vector(pos.x, pos.y + size.y)];
-        this.currentPath.push(...positions.map((p) => new Vertex(p, color)));
+        this.currentPath.push(...positions.map((p) => new Vertex(p, this.vertexColor)));
     }
 
     /**
@@ -339,19 +400,19 @@ export class Renderer {
      * @param width The stroke width
      * @param options Options for the stroke
      */
-    public stroke(width: number, { closed = false, dashed = false, dashLength = 10 }: StrokeOptions = {}): void {
+    public stroke(width: number, { closed = false, dashed = false, dashLength = 10, miterLimit = 60 }: StrokeOptions = {}): void {
         let nullIndex = this.currentPath.findIndex((v) => v === null);
 
         if (nullIndex === -1) {
             // There are no breaks in the path
-            if (!dashed) this.buildPath(this.currentPath as Vertex[], width, closed);
-            else this.buildDashedPath(this.currentPath as Vertex[], width, closed, dashLength);
+            if (!dashed) this.buildPath(this.currentPath as Vertex[], width, closed, miterLimit);
+            else this.buildDashedPath(this.currentPath as Vertex[], width, closed, dashLength, miterLimit);
             return;
         }
 
         while (nullIndex !== -1) {
-            if (!dashed) this.buildPath(this.currentPath.slice(0, nullIndex) as Vertex[], width, closed);
-            else this.buildDashedPath(this.currentPath.slice(0, nullIndex) as Vertex[], width, closed, dashLength);
+            if (!dashed) this.buildPath(this.currentPath.slice(0, nullIndex) as Vertex[], width, closed, miterLimit);
+            else this.buildDashedPath(this.currentPath.slice(0, nullIndex) as Vertex[], width, closed, dashLength, miterLimit);
 
             this.currentPath = this.currentPath.slice(nullIndex + 1);
 
@@ -463,6 +524,56 @@ export class Renderer {
 
         // Render text
         if (this.textRenderer) this.textRenderer.render(this.camera);
+    }
+
+    /**
+     * Translates the camera by the specified vector
+     * @param pos The vector to translate the camera by
+     */
+    public translate(pos: Vector): void;
+    /**
+     * Translates the camera by the specified x and y values
+     * @param x The x value to translate the camera by
+     * @param y The y value to translate the camera by
+     */
+    public translate(x: number, y: number): void;
+    public translate(pos: Vector | number, y: number = 0): void {
+        this.transform.translate(pos instanceof Vector ? pos : new Vector(pos, y));
+    }
+
+    /**
+     * Rotates the camera by the specified angle
+     * @param angle The angle to rotate the camera by
+     */
+    public rotate(angle: number) {
+        this.transform.rotate(angle);
+    }
+
+    /**
+     * Scales up by the specified vector
+     * @param scale The vector to scale the camera by
+     */
+    public scale(scale: Vector): void;
+    /**
+     * Scales up by the specified x and y values
+     * @param x The x value to scale the camera by
+     * @param y The y value to scale the camera by
+     */
+    public scale(x: number, y: number): void;
+    /**
+     * Scales uniformly by the specified value
+     * @param n The value to scale the camera by
+     */
+    public scale(n: number): void;
+    public scale(scale: Vector | number, y?: number): void {
+        this.transform.scale(scale instanceof Vector ? scale : new Vector(scale, y || scale));
+    }
+
+    /**
+     * Resets all transforms
+     */
+    public resetTransforms() {
+        this.transform.resetTransforms();
     }
 
     /**

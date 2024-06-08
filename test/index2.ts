@@ -10,9 +10,11 @@ function draw() {
     renderer.clear();
 
     console.time();
+    renderer.beginPath();
     for (let y = 0; y < 10000; y += 1) {
-        renderer.line(new Polyly.Vector(0, y), new Polyly.Vector(window.innerWidth, y), 1, new Polyly.Color(255, 255, 255, 255));
+        renderer.line(new Polyly.Vector(0, y), new Polyly.Vector(window.innerWidth, y));
     }
+    renderer.stroke(1);
     console.timeEnd();
 
     renderer.render();

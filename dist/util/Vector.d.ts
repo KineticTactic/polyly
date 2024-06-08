@@ -1,4 +1,4 @@
-export declare function V(x: number, y: number): Vector;
+export declare function Vec(x: number, y: number): Vector;
 /**
  * A vector class
  * @category Util
