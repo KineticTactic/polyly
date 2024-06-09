@@ -1,6 +1,8 @@
 import { Color } from "../util/Color";
 import { Vector } from "../util/Vector";
-import { Camera } from "./Camera";
+// import { Camera } from "./Camera";
+import { Renderer } from "./Renderer";
+// import { Transform } from "./Transform";
 
 /**
  * Options for passing to the Canvas Text renderer constructor
@@ -11,13 +13,29 @@ export interface CanvasTextRendererOptions {
     canvas: HTMLCanvasElement;
 }
 
+export enum TextMode {
+    Fill,
+    Stroke,
+}
+
+// This is a temporary fix for the missing types in the CanvasRenderingContext2D interface
+interface CanvasExtended extends CanvasRenderingContext2D {
+    letterSpacing: string;
+    wordSpacing: string;
+}
+
+/**
+ * A class for rendering text to a canvas
+ * You're supposed to use this class through the renderer
+ * @category Core
+ */
 export class CanvasTextRenderer {
     canvas: HTMLCanvasElement;
     ctx: CanvasRenderingContext2D;
+    renderer: Renderer;
 
-    textBuffer: { text: string; pos: Vector; color: Color; font: string }[] = [];
-
-    constructor(options: CanvasTextRendererOptions) {
+    constructor(renderer: Renderer, options: CanvasTextRendererOptions) {
+        this.renderer = renderer;
         this.canvas = options.canvas;
         this.ctx = this.canvas.getContext("2d")!;
     }
@@ -30,20 +48,38 @@ export class CanvasTextRenderer {
         this.ctx.font = font;
     }
 
-    public renderText(text: string, pos: Vector, color: Color) {
-        this.textBuffer.push({ text, pos, color, font: this.ctx.font });
+    public setLineWidth(width: number) {
+        this.ctx.lineWidth = width;
     }
 
     public setTextAlign(align: CanvasTextAlign) {
         this.ctx.textAlign = align;
     }
 
-    public render(camera: Camera) {
-        for (let text of this.textBuffer) {
-            this.ctx.font = text.font;
-            this.ctx.fillStyle = `rgba(${text.color.r}, ${text.color.g}, ${text.color.b}, ${text.color.a})`;
-            const screenPos = camera.worldSpaceToScreenSpace(text.pos);
-            this.ctx.fillText(text.text, screenPos.x, screenPos.y);
+    public setLetterSpacing(spacing: string) {
+        (this.ctx as CanvasExtended).letterSpacing = spacing;
+    }
+
+    public setWordSpacing(spacing: string) {
+        (this.ctx as CanvasExtended).wordSpacing = spacing;
+    }
+
+    public renderText(text: string, pos: Vector, color: Color, mode: TextMode = TextMode.Fill) {
+        const screenPos = this.renderer.camera.worldSpaceToScreenSpace(pos).add(this.renderer.transform.translation);
+
+        this.ctx.save();
+        this.ctx.translate(screenPos.x, screenPos.y);
+        this.ctx.rotate(this.renderer.transform.rotation);
+        this.ctx.scale(this.renderer.transform.scaling.x, this.renderer.transform.scaling.y);
+
+        if (mode === TextMode.Fill) {
+            this.ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`;
+            this.ctx.fillText(text, 0, 0);
+        } else {
+            this.ctx.strokeStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`;
+            this.ctx.strokeText(text, 0, 0);
         }
+
+        this.ctx.restore();
     }
 }

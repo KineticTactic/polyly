@@ -8,7 +8,7 @@ import { Vector } from "../util/Vector";
 import { Color } from "../util/Color";
 import { calculateSidewaysVertices, calculateVertexPoints } from "../util/math";
 import { Transform } from "./Transform";
-import { CanvasTextRenderer } from "./CanvasTextRenderer";
+import { CanvasTextRenderer, TextMode } from "./CanvasTextRenderer";
 import { DebugRenderer } from "../util/DebugRenderer";
 
 /**
@@ -41,6 +41,15 @@ export interface StrokeOptions {
     dashLength?: number;
     /** The miter limit angle below which the line join becomes bevelled */
     miterLimit?: number;
+}
+
+/**
+ * The blend modes for rendering
+ * @category Core
+ */
+export enum BlendModes {
+    Normal,
+    Additive,
 }
 
 /**
@@ -98,7 +107,8 @@ export class Renderer {
             textCanvas.style.position = "absolute";
             textCanvas.style.top = "0";
             textCanvas.style.left = "0";
-            this.textRenderer = new CanvasTextRenderer({ canvas: textCanvas });
+            textCanvas.style.pointerEvents = "none";
+            this.textRenderer = new CanvasTextRenderer(this, { canvas: textCanvas });
         } else {
             this.textRenderer = null;
         }
@@ -135,6 +145,7 @@ export class Renderer {
             debugCanvas.style.position = "absolute";
             debugCanvas.style.top = "0";
             debugCanvas.style.left = "0";
+            debugCanvas.style.pointerEvents = "none";
             DebugRenderer.init({ canvas: debugCanvas, camera: this.camera });
         }
     }
@@ -165,6 +176,30 @@ export class Renderer {
             this.buffers.push(buffer);
         }
         this.currentBufferIndex = buffer.id;
+    }
+
+    /**
+     * Enables or disables blending
+     * @param enable Whether to enable or disable blending
+     */
+    public enableBlending(enable: boolean) {
+        if (enable) this.gl.enable(this.gl.BLEND);
+        else this.gl.disable(this.gl.BLEND);
+    }
+
+    /**
+     * Set Blend Mode
+     * @param buffer The buffer to draw to
+     */
+    public setBlendMode(blendMode: BlendModes) {
+        switch (blendMode) {
+            case BlendModes.Normal:
+                this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA);
+                break;
+            case BlendModes.Additive:
+                this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE);
+                break;
+        }
     }
 
     /**
@@ -203,7 +238,6 @@ export class Renderer {
                 bevelledStart = true;
                 bevelledRight = vertexData.right as boolean;
             }
-            console.log(outputVertices.length);
         }
 
         for (let i = 0; i < vertices.length - (closed ? 1 : 2); i++) {
@@ -229,7 +263,6 @@ export class Renderer {
                 if (!bevelledRight) indexData.push(i, i + 1, 0, i, 0, 1);
                 else {
                     indexData.push(i, i + 1, 2, i, 0, 2);
-                    console.log("YES");
                 }
             } else indexData.push(i, i + 1, 1, i, 0, 1);
         }
@@ -475,14 +508,46 @@ export class Renderer {
     }
 
     /**
+     * Sets the text align of the text renderer
+     * @param align The text align to set
+     * @example renderer.setTextAlign("center");
+     */
+    public setLetterSpacing(spacing: string) {
+        if (!this.textRenderer) throw new Error("Text renderer not initialized!");
+        this.textRenderer.setLetterSpacing(spacing);
+    }
+
+    /**
+     * Sets the text align of the text renderer
+     * @param align The text align to set
+     * @example renderer.setTextAlign("center");
+     */
+    public setWordSpacing(spacing: string) {
+        if (!this.textRenderer) throw new Error("Text renderer not initialized!");
+        this.textRenderer.setWordSpacing(spacing);
+    }
+
+    /**
      *
      * @param text The text to render
      * @param pos The position to render the text at
      * @param maxWidth Max width of the text
      */
-    public renderText(text: string, pos: Vector, color: Color) {
+    public fillText(text: string, pos: Vector) {
         if (!this.textRenderer) throw new Error("Text renderer not initialized!");
-        this.textRenderer.renderText(text, pos, color);
+        this.textRenderer.renderText(text, pos, this.vertexColor, TextMode.Fill);
+    }
+
+    /**
+     *
+     * @param text The text to render
+     * @param pos The position to render the text at
+     * @param maxWidth Max width of the text
+     */
+    public strokeText(text: string, pos: Vector, lineWidth: number = 1) {
+        if (!this.textRenderer) throw new Error("Text renderer not initialized!");
+        this.textRenderer.setLineWidth(lineWidth);
+        this.textRenderer.renderText(text, pos, this.vertexColor, TextMode.Stroke);
     }
 
     /**
@@ -504,16 +569,12 @@ export class Renderer {
         // Render buffers
         for (const buffer of this.buffers) {
             // this.defaultBuffer.render(this.shaderProgramInfo);
-            // console.log(buffer);
 
             buffer.render(this.shaderProgramInfo);
         }
 
         // Reset
         this.buffers[0].reset();
-
-        // Render text
-        if (this.textRenderer) this.textRenderer.render(this.camera);
     }
 
     /**

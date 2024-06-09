@@ -81,7 +81,7 @@ renderer.fill();
 Strokes (outlines) every single path or shape added since the last `Renderer.beginPath()` call.
 
 ```js
-renderer.strokePath(10, { closed: true, dashed: true, dashLength: 15 });
+renderer.stroke(10, { closed: true, dashed: true, dashLength: 15 });
 ```
 
 `Renderer.fill()`

@@ -36,6 +36,14 @@ export interface StrokeOptions {
     miterLimit?: number;
 }
 /**
+ * The blend modes for rendering
+ * @category Core
+ */
+export declare enum BlendModes {
+    Normal = 0,
+    Additive = 1
+}
+/**
  * The main Renderer class with all the rendering function
  * @category Core
  */
@@ -71,6 +79,16 @@ export declare class Renderer {
      * @param buffer The buffer to draw to
      */
     setBuffer(buffer: Buffer | 0): void;
+    /**
+     * Enables or disables blending
+     * @param enable Whether to enable or disable blending
+     */
+    enableBlending(enable: boolean): void;
+    /**
+     * Set Blend Mode
+     * @param buffer The buffer to draw to
+     */
+    setBlendMode(blendMode: BlendModes): void;
     /**
      * Clears the screen with the specified color
      * @param color The clear color
@@ -162,12 +180,31 @@ export declare class Renderer {
      */
     setTextAlign(align: CanvasTextAlign): void;
     /**
+     * Sets the text align of the text renderer
+     * @param align The text align to set
+     * @example renderer.setTextAlign("center");
+     */
+    setLetterSpacing(spacing: string): void;
+    /**
+     * Sets the text align of the text renderer
+     * @param align The text align to set
+     * @example renderer.setTextAlign("center");
+     */
+    setWordSpacing(spacing: string): void;
+    /**
      *
      * @param text The text to render
      * @param pos The position to render the text at
      * @param maxWidth Max width of the text
      */
-    renderText(text: string, pos: Vector, color: Color): void;
+    fillText(text: string, pos: Vector): void;
+    /**
+     *
+     * @param text The text to render
+     * @param pos The position to render the text at
+     * @param maxWidth Max width of the text
+     */
+    strokeText(text: string, pos: Vector, lineWidth?: number): void;
     /**
      * The main render function. Call this every frame once to render everything.
      * @param camera The camera to render with

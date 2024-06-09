@@ -11,6 +11,7 @@ export declare class Transform {
     scaling: Vector;
     private transformed;
     constructor();
+    copy(): Transform;
     translate(translation: Vector): void;
     setTranslation(translation: Vector): void;
     rotate(angle: number): void;

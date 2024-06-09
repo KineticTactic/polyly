@@ -19,6 +19,15 @@ export class Transform {
         this.scaling = new Vector(1, 1);
     }
 
+    public copy() {
+        const t = new Transform();
+        t.translation = this.translation.copy();
+        t.rotation = this.rotation;
+        t.scaling = this.scaling.copy();
+        t.transformed = this.transformed;
+        return t;
+    }
+
     public translate(translation: Vector) {
         this.translation.add(translation);
         this.transformed = true;
