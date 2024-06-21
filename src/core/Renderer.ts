@@ -8,7 +8,7 @@ import { Vector } from "../util/Vector";
 import { Color } from "../util/Color";
 import { calculateSidewaysVertices, calculateVertexPoints } from "../util/math";
 import { Transform } from "./Transform";
-import { CanvasTextRenderer, TextMode } from "./CanvasTextRenderer";
+import { CanvasTextRenderer, TextMeasurements, TextMode } from "./CanvasTextRenderer";
 import { DebugRenderer } from "../util/DebugRenderer";
 
 /**
@@ -414,7 +414,7 @@ export class Renderer {
      * @param size The size (width and height) of the rectangle
      */
     public rect(pos: Vector, size: Vector) {
-        const positions = [pos, new Vector(pos.x + size.x, pos.y), new Vector(pos.x + size.y, pos.y + size.y), new Vector(pos.x, pos.y + size.y)];
+        const positions = [pos, new Vector(pos.x + size.x, pos.y), new Vector(pos.x + size.x, pos.y + size.y), new Vector(pos.x, pos.y + size.y)];
         this.currentPath.push(...positions.map((p) => new Vertex(p, this.vertexColor)));
     }
 
@@ -489,12 +489,22 @@ export class Renderer {
 
     /**
      * Sets the font of the text renderer
-     * @param font The font to set
+     * @param fontFace The font to set
      * @example renderer.setFont("30px Arial");
      */
-    public setFont(font: string) {
+    public setFontFace(fontFace: string) {
         if (!this.textRenderer) throw new Error("Text renderer not initialized!");
-        this.textRenderer.setFont(font);
+        this.textRenderer.setFontFace(fontFace);
+    }
+
+    /**
+     * Sets the font size of the text renderer
+     * @param fontSize The font size to set
+     * @example renderer.setFontSize(20);
+     */
+    public setFontSize(fontSize: number) {
+        if (!this.textRenderer) return;
+        this.textRenderer.setFontSize(fontSize);
     }
 
     /**
@@ -548,6 +558,16 @@ export class Renderer {
         if (!this.textRenderer) throw new Error("Text renderer not initialized!");
         this.textRenderer.setLineWidth(lineWidth);
         this.textRenderer.renderText(text, pos, this.vertexColor, TextMode.Stroke);
+    }
+
+    /**
+     * Returns the width of the specified text using the current font and text renderer
+     * @param text The text to measure
+     * @returns The width of the text
+     */
+    public getTextMetrics(text: string): TextMeasurements {
+        if (!this.textRenderer) throw new Error("Text renderer not initialized!");
+        return this.textRenderer.getTextMetrics(text);
     }
 
     /**

@@ -101,18 +101,45 @@ function draw() {
     // renderer.splitPath();
     renderer.stroke(40, { closed: false, miterLimit: 75 });
 
-    renderer.setFont("30px Arial");
-    renderer.setLetterSpacing("10px");
+    renderer.setLetterSpacing("1px");
     // renderer.scale(0.5);
     // renderer.camera.translate(Polyly.Vec(, 0));
-    renderer.camera.setZoom(2);
-    console.log(renderer.camera.zoom);
+    renderer.camera.setZoom(1);
+    // console.log(renderer.camera.zoom);
 
     renderer.setColor(Polyly.RGBA(255, 255, 255, 255));
-    renderer.fillText("Hello World!", Polyly.Vec(0, 0));
+    // renderer.fillText("Hello World!", Polyly.Vec(0, 0));
     renderer.setLetterSpacing("1px");
     renderer.setColor(Polyly.RGBA(255, 255, 0, 255));
-    renderer.strokeText("Hello World!", Polyly.Vec(-10, -200), 0.5);
+    const size = renderer.getTextMetrics("The quick brown fox!");
+    // console.log(size);
+    renderer.translate(Polyly.Vec(-size.width / 2, 0));
+    renderer.setFontFace("Arial");
+    renderer.setFontSize(40);
+    renderer.strokeText("The quick brown fox!", Polyly.Vec(0, 0), 0.5);
+    renderer.setColor(Polyly.RGBA(0, 255, 255, 255));
+    // renderer.camera.setZoom(2);
+    renderer.beginPath();
+    renderer.rect(Polyly.Vec(0, size.deltaY), Polyly.Vec(size.width, -size.height));
+    renderer.fill();
+
+    // renderer.beginPath();
+    // renderer.setColor(Polyly.RGBA(0, 255, 0, 255));
+    // renderer.vertex(Polyly.Vec(0, 0));
+    // renderer.vertex(Polyly.Vec(0, -height));
+    // renderer.vertex(Polyly.Vec(width, -height));
+    // renderer.vertex(Polyly.Vec(width, 0));
+    // renderer.stroke(20, { closed: true });
+
+    renderer.resetTransforms();
+    renderer.translate(Polyly.Vec(-window.innerWidth / 2, -window.innerHeight / 2));
+    renderer.beginPath();
+    renderer.setColor(Polyly.RGBA(255, 0, 0, 255));
+    renderer.vertex(Polyly.Vec(0, 0));
+    renderer.vertex(Polyly.Vec(window.innerWidth, 0));
+    renderer.vertex(Polyly.Vec(window.innerWidth, window.innerHeight));
+    renderer.vertex(Polyly.Vec(0, window.innerHeight));
+    renderer.stroke(10, { closed: true });
 
     // renderer.beginPath();
     // renderer.arc(new Polyly.Vector(0, 0), 100, 0, (Math.PI * 6) / 4);

@@ -50,7 +50,7 @@ export class Camera {
     }
 
     private calculateMatrix() {
-        const factor = this.displaySize.y / this.zoom;
+        const factor = this.displaySize.y / this.zoom / 2;
         this.matrix = twgl.m4.translate(
             twgl.m4.ortho(-this.aspect * factor, this.aspect * factor, 1 * factor, -1 * factor, -1, 1),
             twgl.v3.create(-this.pos.x, -this.pos.y)
@@ -63,7 +63,7 @@ export class Camera {
      * @returns The Vector converted to World space
      */
     public screenSpaceToWorldSpace(vector: Vector) {
-        const factor = window.innerHeight / this.zoom;
+        const factor = window.innerHeight / this.zoom / 2;
 
         const x = interpolate(vector.x, 0, window.innerWidth, -this.aspect * factor, this.aspect * factor) + this.pos.x;
         const y = interpolate(vector.y, 0, window.innerHeight, -1 * factor, 1 * factor) + this.pos.y;
@@ -82,6 +82,15 @@ export class Camera {
         const y = interpolate(vector.y, -1 * factor + this.pos.y, 1 * factor + this.pos.y, 0, window.innerHeight);
         return new Vector(x, y);
     }
+
+    // /**
+    //  * Converts a distance in world space into a distance in screen space (pixels)
+    //  * @param distance The distance in world space
+    //  * @returns The distance in screen space (pixels)
+    //  */
+    // public worldSpaceToScreenSpaceDistance(distance: number) {
+    //     return distance * this.zoom;
+    // }
 
     /**
      * Returns the camera matrix

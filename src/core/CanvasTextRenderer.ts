@@ -18,6 +18,12 @@ export enum TextMode {
     Stroke,
 }
 
+export interface TextMeasurements {
+    width: number;
+    height: number;
+    deltaY: number;
+}
+
 // This is a temporary fix for the missing types in the CanvasRenderingContext2D interface
 interface CanvasExtended extends CanvasRenderingContext2D {
     letterSpacing: string;
@@ -33,6 +39,8 @@ export class CanvasTextRenderer {
     canvas: HTMLCanvasElement;
     ctx: CanvasRenderingContext2D;
     renderer: Renderer;
+    currentFont: string = "Arial";
+    currentFontSize: number = 32;
 
     constructor(renderer: Renderer, options: CanvasTextRendererOptions) {
         this.renderer = renderer;
@@ -44,8 +52,14 @@ export class CanvasTextRenderer {
         this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
     }
 
-    public setFont(font: string) {
-        this.ctx.font = font;
+    public setFontFace(fontFace: string) {
+        this.currentFont = fontFace;
+        this.ctx.font = `${this.currentFontSize}px ${fontFace}`;
+    }
+
+    public setFontSize(size: number) {
+        this.currentFontSize = size;
+        this.ctx.font = `${size}px ${this.currentFont}`;
     }
 
     public setLineWidth(width: number) {
@@ -71,6 +85,7 @@ export class CanvasTextRenderer {
         this.ctx.translate(screenPos.x, screenPos.y);
         this.ctx.rotate(this.renderer.transform.rotation);
         this.ctx.scale(this.renderer.transform.scaling.x * this.renderer.camera.zoom, this.renderer.transform.scaling.y * this.renderer.camera.zoom);
+        // console.log(this.renderer.transform.scaling.x * this.renderer.camera.zoom);
 
         if (mode === TextMode.Fill) {
             this.ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`;
@@ -79,7 +94,20 @@ export class CanvasTextRenderer {
             this.ctx.strokeStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`;
             this.ctx.strokeText(text, 0, 0);
         }
+        this.ctx.fillStyle = "red";
+        // this.ctx.fillRect(0, 0, this.getTextWidth(text), -30);
 
         this.ctx.restore();
+    }
+
+    public getTextMetrics(text: string): TextMeasurements {
+        const metrics = this.ctx.measureText(text);
+        console.log(metrics.actualBoundingBoxDescent);
+
+        return {
+            width: metrics.actualBoundingBoxRight + metrics.actualBoundingBoxLeft,
+            height: metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent,
+            deltaY: metrics.actualBoundingBoxDescent,
+        };
     }
 }
