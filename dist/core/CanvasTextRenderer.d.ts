@@ -13,6 +13,11 @@ export declare enum TextMode {
     Fill = 0,
     Stroke = 1
 }
+export interface TextMeasurements {
+    width: number;
+    height: number;
+    deltaY: number;
+}
 /**
  * A class for rendering text to a canvas
  * You're supposed to use this class through the renderer
@@ -22,12 +27,16 @@ export declare class CanvasTextRenderer {
     canvas: HTMLCanvasElement;
     ctx: CanvasRenderingContext2D;
     renderer: Renderer;
+    currentFont: string;
+    currentFontSize: number;
     constructor(renderer: Renderer, options: CanvasTextRendererOptions);
     clear(): void;
-    setFont(font: string): void;
+    setFontFace(fontFace: string): void;
+    setFontSize(size: number): void;
     setLineWidth(width: number): void;
     setTextAlign(align: CanvasTextAlign): void;
     setLetterSpacing(spacing: string): void;
     setWordSpacing(spacing: string): void;
     renderText(text: string, pos: Vector, color: Color, mode?: TextMode): void;
+    getTextMetrics(text: string): TextMeasurements;
 }

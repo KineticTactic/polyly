@@ -1,4 +1,4 @@
-<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>DynamicBufferOptions | polyly</title><meta name="description" content="Documentation for polyly"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script defer src="../assets/main.js"></script><script async src="../assets/search.js" id="tsd-search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
+<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>TextMeasurements | polyly</title><meta name="description" content="Documentation for polyly"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script defer src="../assets/main.js"></script><script async src="../assets/search.js" id="tsd-search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
 <div class="tsd-toolbar-contents container">
 <div class="table-cell" id="tsd-search" data-base="..">
 <div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="#icon-search"></use></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div>
@@ -13,18 +13,14 @@
 <div class="tsd-page-title">
 <ul class="tsd-breadcrumb">
 <li><a href="../modules.html">polyly</a></li>
-<li><a href="DynamicBufferOptions.html">DynamicBufferOptions</a></li></ul>
-<h1>Interface DynamicBufferOptions</h1></div>
-<section class="tsd-panel tsd-comment">
-<div class="tsd-comment tsd-typography"><p>The dynamic buffer creation options</p>
-</div>
-<div class="tsd-comment tsd-typography"></div></section>
+<li><a href="TextMeasurements.html">TextMeasurements</a></li></ul>
+<h1>Interface TextMeasurements</h1></div>
 <section class="tsd-panel tsd-hierarchy">
 <h4>Hierarchy</h4>
 <ul class="tsd-hierarchy">
-<li><span class="target">DynamicBufferOptions</span></li></ul></section><aside class="tsd-sources">
+<li><span class="target">TextMeasurements</span></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/407737b/src/buffers/DynamicBuffer.ts#L10">buffers/DynamicBuffer.ts:10</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/407737b/src/core/CanvasTextRenderer.ts#L21">core/CanvasTextRenderer.ts:21</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -32,21 +28,27 @@
 <div class="tsd-accordion-details">
 <section class="tsd-index-section">
 <h3 class="tsd-index-heading">Properties</h3>
-<div class="tsd-index-list"><a href="DynamicBufferOptions.html#bufferSize" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>buffer<wbr/>Size</span></a>
+<div class="tsd-index-list"><a href="TextMeasurements.html#deltaY" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>deltaY</span></a>
+<a href="TextMeasurements.html#height" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>height</span></a>
+<a href="TextMeasurements.html#width" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>width</span></a>
 </div></section></div></details></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Properties</h2>
-<section class="tsd-panel tsd-member"><a id="bufferSize" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><span>buffer<wbr/>Size</span><a href="#bufferSize" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">buffer<wbr/>Size</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
-<div class="tsd-comment tsd-typography"><p>Maximum size of a single buffer.</p>
-</div>
-<div class="tsd-comment tsd-typography">
-<h4>Default Value</h4><pre><code class="language-ts"><span class="hl-7">10000</span>
-</code><button>Copy</button></pre>
-</div><aside class="tsd-sources">
+<section class="tsd-panel tsd-member"><a id="deltaY" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>deltaY</span><a href="#deltaY" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">deltaY</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/407737b/src/buffers/DynamicBuffer.ts#L15">buffers/DynamicBuffer.ts:15</a></li></ul></aside></section></section></div>
+<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/407737b/src/core/CanvasTextRenderer.ts#L24">core/CanvasTextRenderer.ts:24</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member"><a id="height" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>height</span><a href="#height" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">height</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/407737b/src/core/CanvasTextRenderer.ts#L23">core/CanvasTextRenderer.ts:23</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member"><a id="width" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>width</span><a href="#width" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">width</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/KineticTactic/polyly/blob/407737b/src/core/CanvasTextRenderer.ts#L22">core/CanvasTextRenderer.ts:22</a></li></ul></aside></section></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
@@ -66,7 +68,9 @@
 <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg>On This Page</h3></summary>
 <div class="tsd-accordion-details">
 <ul>
-<li><a href="#bufferSize" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>buffer<wbr/>Size</span></a></li></ul></div></details></div>
+<li><a href="#deltaY" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>deltaY</span></a></li>
+<li><a href="#height" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>height</span></a></li>
+<li><a href="#width" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>width</span></a></li></ul></div></details></div>
 <div class="site-menu">
 <nav class="tsd-navigation"><a href="../modules.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1"></use></svg><span>polyly</span></a>
 <ul class="tsd-small-nested-navigation" id="tsd-nav-container" data-base="..">
@@ -84,10 +88,10 @@
 <li><a href="../classes/Vertex.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg>Vertex</a></li>
 <li><a href="BufferDataOptions.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg>BufferDataOptions</a></li>
 <li><a href="CanvasTextRendererOptions.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg>CanvasTextRendererOptions</a></li>
-<li><a href="DynamicBufferOptions.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg>DynamicBufferOptions</a></li>
+<li><a href="DynamicBufferOptions.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg>DynamicBufferOptions</a></li>
 <li><a href="RendererOptions.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg>RendererOptions</a></li>
 <li><a href="StrokePathOptions.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg>StrokePathOptions</a></li>
-<li><a href="TextMeasurements.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg>TextMeasurements</a></li>
+<li><a href="TextMeasurements.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg>TextMeasurements</a></li>
 <li><a href="../functions/RGB.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>RGB</a></li>
 <li><a href="../functions/RGBA.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>RGBA</a></li>
 <li><a href="../functions/Vec.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>Vec</a></li>

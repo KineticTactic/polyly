@@ -4,7 +4,7 @@ import { Buffer } from "../buffers/Buffer";
 import { Vector } from "../util/Vector";
 import { Color } from "../util/Color";
 import { Transform } from "./Transform";
-import { CanvasTextRenderer } from "./CanvasTextRenderer";
+import { CanvasTextRenderer, TextMeasurements } from "./CanvasTextRenderer";
 /**
  * Options for passing to the Renderer constructor
  * @category Core
@@ -169,10 +169,16 @@ export declare class Renderer {
     private fillPath;
     /**
      * Sets the font of the text renderer
-     * @param font The font to set
+     * @param fontFace The font to set
      * @example renderer.setFont("30px Arial");
      */
-    setFont(font: string): void;
+    setFontFace(fontFace: string): void;
+    /**
+     * Sets the font size of the text renderer
+     * @param fontSize The font size to set
+     * @example renderer.setFontSize(20);
+     */
+    setFontSize(fontSize: number): void;
     /**
      * Sets the text align of the text renderer
      * @param align The text align to set
@@ -205,6 +211,12 @@ export declare class Renderer {
      * @param maxWidth Max width of the text
      */
     strokeText(text: string, pos: Vector, lineWidth?: number): void;
+    /**
+     * Returns the width of the specified text using the current font and text renderer
+     * @param text The text to measure
+     * @returns The width of the text
+     */
+    getTextMetrics(text: string): TextMeasurements;
     /**
      * The main render function. Call this every frame once to render everything.
      * @param camera The camera to render with

@@ -48,7 +48,8 @@ renderer.rect(new Polyly.Vector(0, 0), new Polyly.Vector(100, 100));
 renderer.fill();
 
 renderer.fillText("Hellooo World!", new Polyly.Vector(100, 100));
-renderer.setFont("30px Arial");
+renderer.setFontFace("Arial");
+renderer.setFontSize(30);
 renderer.fillText("THE quick Brown Fox ", new Polyly.Vector(-100, 0));
 
 renderer.camera.translate(new Polyly.Vector(-100, -100));
