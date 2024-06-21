@@ -70,7 +70,7 @@ export class CanvasTextRenderer {
         this.ctx.save();
         this.ctx.translate(screenPos.x, screenPos.y);
         this.ctx.rotate(this.renderer.transform.rotation);
-        this.ctx.scale(this.renderer.transform.scaling.x, this.renderer.transform.scaling.y);
+        this.ctx.scale(this.renderer.transform.scaling.x * this.renderer.camera.zoom, this.renderer.transform.scaling.y * this.renderer.camera.zoom);
 
         if (mode === TextMode.Fill) {
             this.ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`;

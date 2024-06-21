@@ -16,7 +16,7 @@ renderer.clear();
 // renderer.line(new Polyly.Vector(0, 0), new Polyly.Vector(100, 100), 10, new Polyly.Color(100, 0, 0, 255));
 // renderer.line(new Polyly.Vector(-10, 30), new Polyly.Vector(-100, 150), 10, new Polyly.Color(0, 255, 15, 255));
 
-renderer.camera.setZoom(2);
+renderer.camera.setZoom(1);
 
 // renderer.transform.resetTransforms();
 // renderer.transform.translate(new Polyly.Vector(500, 200));
@@ -85,9 +85,9 @@ function draw() {
 
     renderer.beginPath();
     renderer.resetTransforms();
-    renderer.translate(Polyly.Vec(-200, 300));
-    renderer.scale(1.4);
-    renderer.rotate(-0.5);
+    // renderer.translate(Polyly.Vec(-200, 300));
+    // renderer.scale(1.4);
+    // renderer.rotate(-0.5);
     renderer.setColor(Polyly.RGBA(255, 0, 255, 150));
     renderer.vertex(Polyly.Vec(0, 0));
     renderer.vertex(Polyly.Vec(100, 100));
@@ -103,6 +103,11 @@ function draw() {
 
     renderer.setFont("30px Arial");
     renderer.setLetterSpacing("10px");
+    // renderer.scale(0.5);
+    // renderer.camera.translate(Polyly.Vec(, 0));
+    renderer.camera.setZoom(2);
+    console.log(renderer.camera.zoom);
+
     renderer.setColor(Polyly.RGBA(255, 255, 255, 255));
     renderer.fillText("Hello World!", Polyly.Vec(0, 0));
     renderer.setLetterSpacing("1px");
