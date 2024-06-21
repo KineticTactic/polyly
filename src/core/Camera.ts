@@ -76,7 +76,7 @@ export class Camera {
      * @returns The Vector converted to Screen space
      */
     public worldSpaceToScreenSpace(vector: Vector) {
-        const factor = window.innerHeight / this.zoom;
+        const factor = window.innerHeight / this.zoom / 2;
 
         const x = interpolate(vector.x, -this.aspect * factor + this.pos.x, this.aspect * factor + this.pos.x, 0, window.innerWidth);
         const y = interpolate(vector.y, -1 * factor + this.pos.y, 1 * factor + this.pos.y, 0, window.innerHeight);

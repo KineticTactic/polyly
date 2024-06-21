@@ -1377,7 +1377,7 @@ class Hi {
    * @returns The Vector converted to Screen space
    */
   worldSpaceToScreenSpace(t) {
-    const n = window.innerHeight / this.zoom, r = X(t.x, -this.aspect * n + this.pos.x, this.aspect * n + this.pos.x, 0, window.innerWidth), i = X(t.y, -1 * n + this.pos.y, 1 * n + this.pos.y, 0, window.innerHeight);
+    const n = window.innerHeight / this.zoom / 2, r = X(t.x, -this.aspect * n + this.pos.x, this.aspect * n + this.pos.x, 0, window.innerWidth), i = X(t.y, -1 * n + this.pos.y, 1 * n + this.pos.y, 0, window.innerHeight);
     return new x(r, i);
   }
   // /**
