@@ -79,7 +79,8 @@ export class CanvasTextRenderer {
     }
 
     public renderText(text: string, pos: Vector, color: Color, mode: TextMode = TextMode.Fill) {
-        const screenPos = this.renderer.camera.worldSpaceToScreenSpace(pos).add(this.renderer.transform.translation);
+        ///TODO: Currently, any camera.setZoom after the text has already rendered wont have any effect.
+        const screenPos = this.renderer.camera.worldSpaceToScreenSpace(pos).add(this.renderer.transform.translation.copy().mult(this.renderer.camera.zoom));
 
         this.ctx.save();
         this.ctx.translate(screenPos.x, screenPos.y);

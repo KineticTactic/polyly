@@ -114,8 +114,12 @@ function draw() {
     const size = renderer.getTextMetrics("The quick brown fox!");
     // console.log(size);
     renderer.translate(Polyly.Vec(-size.width / 2, 0));
+    renderer.translate(Polyly.Vec(-100, 200));
+    renderer.scale(0.5);
     renderer.setFontFace("Arial");
     renderer.setFontSize(40);
+
+    renderer.camera.setZoom(1.5);
     renderer.strokeText("The quick brown fox!", Polyly.Vec(0, 0), 0.5);
     renderer.setColor(Polyly.RGBA(0, 255, 255, 255));
     // renderer.camera.setZoom(2);

@@ -1641,7 +1641,7 @@ class ji {
     this.ctx.wordSpacing = t;
   }
   renderText(t, n, r, i = 0) {
-    const s = this.renderer.camera.worldSpaceToScreenSpace(n).add(this.renderer.transform.translation);
+    const s = this.renderer.camera.worldSpaceToScreenSpace(n).add(this.renderer.transform.translation.copy().mult(this.renderer.camera.zoom));
     this.ctx.save(), this.ctx.translate(s.x, s.y), this.ctx.rotate(this.renderer.transform.rotation), this.ctx.scale(this.renderer.transform.scaling.x * this.renderer.camera.zoom, this.renderer.transform.scaling.y * this.renderer.camera.zoom), i === 0 ? (this.ctx.fillStyle = `rgba(${r.r}, ${r.g}, ${r.b}, ${r.a})`, this.ctx.fillText(t, 0, 0)) : (this.ctx.strokeStyle = `rgba(${r.r}, ${r.g}, ${r.b}, ${r.a})`, this.ctx.strokeText(t, 0, 0)), this.ctx.fillStyle = "red", this.ctx.restore();
   }
   getTextMetrics(t) {
